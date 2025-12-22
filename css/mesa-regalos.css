@@ -1,0 +1,266 @@
+/* Mesa de Regalos Styles */
+
+.gift-icon {
+    font-size: 5rem;
+    color: var(--gold);
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.5));
+}
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: var(--gold-light);
+    margin: 20px 0;
+    text-shadow: 0 4px 20px rgba(212, 175, 55, 0.6);
+}
+
+.page-subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    color: var(--cream);
+    opacity: 0.9;
+    line-height: 1.8;
+}
+
+/* Stores Grid */
+.stores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.store-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+}
+
+.store-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+}
+
+.store-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.store-logo.liverpool {
+    background: linear-gradient(135deg, #e30613, #a00);
+}
+
+.store-logo.palacio {
+    background: linear-gradient(135deg, #000000, #333);
+}
+
+.store-logo.amazon {
+    background: linear-gradient(135deg, #ff9900, #ff6600);
+}
+
+.store-card h3 {
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+
+.store-number {
+    font-size: 0.95rem;
+    color: var(--cream);
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+.event-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 25px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+/* Gifts Grid */
+.gifts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.gift-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+}
+
+.gift-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.05);
+}
+
+.gift-item-icon {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+}
+
+.gift-item h4 {
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+
+.gift-item ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.gift-item li {
+    padding: 8px 0;
+    color: var(--cream);
+    font-size: 1rem;
+    position: relative;
+    padding-left: 25px;
+}
+
+.gift-item li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+}
+
+/* Bank Info Card */
+.cash-gift-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.bank-info-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    border: 2px solid var(--gold);
+}
+
+.bank-details {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.bank-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.bank-item i {
+    font-size: 2rem;
+    color: var(--gold);
+    min-width: 40px;
+    text-align: center;
+}
+
+.bank-item strong {
+    display: block;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.bank-item p {
+    color: var(--cream);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.btn-copy {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background: var(--gold);
+    color: var(--primary-dark);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-copy:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Thank You Box */
+.thank-you-box {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+    border-radius: 20px;
+    padding: 50px 30px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stores-grid,
+    .gifts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bank-info-card {
+        padding: 25px;
+    }
+
+    .bank-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .bank-item i {
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+
+    .gift-icon {
+        font-size: 4rem;
+    }
+}
+
+/* Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos de Mesas - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/servicios.css">
+    <style>
+        .floor-plan { background: #f8f9fa; border-radius: 15px; padding: 40px; min-height: 600px; position: relative; border: 2px solid var(--border); }
+        .table-item { position: absolute; background: white; border: 3px solid var(--primary); border-radius: 50%; width: 100px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: move; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .table-item:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .table-number { font-weight: 700; font-size: 1.5rem; color: var(--primary); }
+        .table-capacity { font-size: 0.85rem; color: #636e72; }
+        .add-table-btn { position: absolute; bottom: 20px; right: 20px; padding: 15px 30px; background: var(--success); color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,184,148,0.3); }
+        .table-controls { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .ctrl-input { flex: 1; min-width: 150px; }
+        .assigned-guests { background: white; border-radius: 10px; padding: 20px; margin-top: 20px; border: 2px solid var(--border); }
+        .guest-chip { display: inline-block; padding: 5px 15px; background: var(--primary); color: white; border-radius: 20px; margin: 5px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+        <header class="service-header" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">
+            <div class="service-icon"><i class="fas fa-th"></i></div>
+            <h1>Planos y Asignación de Mesas</h1>
+            <p>Distribución visual del salón y asignación de invitados</p>
+        </header>
+
+        <section class="service-section">
+            <h2><i class="fas fa-cog"></i> Configuración de Mesas</h2>
+            <div class="form-card">
+                <div class="table-controls">
+                    <div class="ctrl-input form-group">
+                        <label>Número de Mesa</label>
+                        <input type="number" id="tableNumber" value="1" min="1">
+                    </div>
+                    <div class="ctrl-input form-group">
+                        <label>Capacidad</label>
+                        <input type="number" id="tableCapacity" value="10" min="1" max="20">
+                    </div>
+                    <div class="ctrl-input form-group">
+                        <label>Tipo de Mesa</label>
+                        <select id="tableType">
+                            <option value="round">Redonda</option>
+                            <option value="square">Cuadrada</option>
+                            <option value="rectangular">Rectangular</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-save" onclick="addTable()"><i class="fas fa-plus"></i> Agregar Mesa al Plano</button>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-map"></i> Plano del Salón</h2>
+            <div class="floor-plan" id="floorPlan">
+                <p style="text-align: center; color: #636e72; padding: 20px;">
+                    Haz clic en "Agregar Mesa" para comenzar a diseñar la distribución del salón
+                </p>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-users"></i> Asignación de Invitados</h2>
+            <div class="form-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Seleccionar Mesa</label>
+                        <select id="selectTable"><option>Primero agrega mesas...</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Invitado</label>
+                        <input type="text" id="guestName" placeholder="Nombre del invitado">
+                    </div>
+                </div>
+                <button class="btn-save" onclick="assignGuest()"><i class="fas fa-user-plus"></i> Asignar Invitado</button>
+                <div class="assigned-guests" id="assignedList"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let tables = [];
+        let assignments = {};
+
+        function addTable() {
+            const tableNum = document.getElementById('tableNumber').value;
+            const capacity = document.getElementById('tableCapacity').value;
+            const table = { number: tableNum, capacity: capacity, x: Math.random() * 70 + 10, y: Math.random() * 70 + 10 };
+            tables.push(table);
+            renderFloorPlan();
+            updateTableSelect();
+        }
+
+        function renderFloorPlan() {
+            const plan = document.getElementById('floorPlan');
+            plan.innerHTML = tables.map(t => `
+                <div class="table-item" style="left: ${t.x}%; top: ${t.y}%;" draggable="true" ondragstart="drag(event, ${t.number})">
+                    <div class="table-number">Mesa ${t.number}</div>
+                    <div class="table-capacity">${t.capacity} personas</div>
+                </div>
+            `).join('');
+        }
+
+        function updateTableSelect() {
+            document.getElementById('selectTable').innerHTML = tables.map(t =>
+                `<option value="${t.number}">Mesa ${t.number} (${t.capacity} personas)</option>`
+            ).join('');
+        }
+
+        function assignGuest() {
+            const tableNum = document.getElementById('selectTable').value;
+            const guest = document.getElementById('guestName').value;
+            if (!guest) return alert('Ingresa un nombre');
+            if (!assignments[tableNum]) assignments[tableNum] = [];
+            assignments[tableNum].push(guest);
+            document.getElementById('guestName').value = '';
+            renderAssignments();
+        }
+
+        function renderAssignments() {
+            let html = '';
+            for (let table in assignments) {
+                html += `<h4 style="margin-top: 20px;">Mesa ${table}:</h4>`;
+                html += assignments[table].map(g => `<span class="guest-chip">${g}</span>`).join('');
+            }
+            document.getElementById('assignedList').innerHTML = html || '<p>No hay invitados asignados</p>';
+        }
+
+        function drag(event, tableNum) {
+            event.dataTransfer.setData("tableNum", tableNum);
+        }
+
+        document.getElementById('floorPlan').addEventListener('dragover', (e) => e.preventDefault());
+        document.getElementById('floorPlan').addEventListener('drop', function(e) {
+            e.preventDefault();
+            const tableNum = e.dataTransfer.getData("tableNum");
+            const table = tables.find(t => t.number == tableNum);
+            if (table) {
+                const rect = this.getBoundingClientRect();
+                table.x = ((e.clientX - rect.left) / rect.width) * 100;
+                table.y = ((e.clientY - rect.top) / rect.height) * 100;
+                renderFloorPlan();
+            }
+        });
+    </script>
+    <script src="js/data-manager.js"></script>
+</body>
+</html>

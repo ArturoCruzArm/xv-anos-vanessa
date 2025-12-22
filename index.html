@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Invitación a los XV años de Vanessa - 12 de abril de 2025">
+    <meta name="theme-color" content="#c41e3a">
+    <title>XV Años - Vanessa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Decoraciones Flotantes -->
+    <div class="floating-flower" style="left: 10%; animation-delay: 0s;">❀</div>
+    <div class="floating-flower" style="left: 30%; animation-delay: 3s;">✿</div>
+    <div class="floating-flower" style="left: 50%; animation-delay: 6s;">❁</div>
+    <div class="floating-flower" style="left: 70%; animation-delay: 9s;">❀</div>
+    <div class="floating-flower" style="left: 90%; animation-delay: 12s;">✿</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="crown"><i class="fas fa-crown"></i></div>
+            <h1 class="main-title">MIS XV AÑOS</h1>
+            <h2 class="quinceañera-name">Vanessa</h2>
+            <div class="divider"></div>
+        </header>
+
+        <!-- Quote -->
+        <div class="quote">
+            "Hoy comienza un nuevo capítulo lleno de sueños, ilusiones y magia. <br>
+            Gracias por acompañarme en este día tan especial."
+        </div>
+
+        <!-- Foto Principal (placeholder - agregar después) -->
+        <section style="padding: 0; background: transparent; border: none; box-shadow: none;">
+            <div style="max-width: 900px; margin: 0 auto; position: relative; border-radius: 20px; overflow: hidden; border: 4px solid var(--gold); box-shadow: 0 12px 50px rgba(212, 175, 55, 0.4);">
+                <div style="background: rgba(255,255,255,0.1); padding: 100px 20px; text-align: center; color: var(--gold);">
+                    <i class="fas fa-image" style="font-size: 4rem;"></i>
+                    <p style="margin-top: 20px;">Foto Principal - Próximamente</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-clock"></i> Cuenta Regresiva</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-users"></i> Mi Familia</h2>
+            <div class="family-section">
+                <div class="family-card">
+                    <div class="family-icon"><i class="fas fa-home"></i></div>
+                    <div class="family-role">Mis Padres</div>
+                    <div class="family-names">
+                        Patricia Cadiz<br>
+                        [Nombre del Padre]
+                    </div>
+                </div>
+                <div class="family-card">
+                    <div class="family-icon"><i class="fas fa-heart"></i></div>
+                    <div class="family-role">Mis Padrinos</div>
+                    <div class="family-names">
+                        [Nombre del Padrino]<br>
+                        [Nombre de la Madrina]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Detalles del Evento</h2>
+            <div class="event-details">
+                <!-- Ceremony -->
+                <div class="event-card">
+                    <span class="event-icon"><i class="fas fa-church"></i></span>
+                    <h3 class="event-title">Ceremonia</h3>
+                    <div class="event-info">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha</strong>
+                        Sábado, 12 de abril de 2025
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-clock"></i> Hora</strong>
+                        17:00 hrs
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-map-marker-alt"></i> Lugar</strong>
+                        [Nombre de la Iglesia]<br>
+                        La Joya, León, Guanajuato
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" target="_blank" class="btn"><i class="fas fa-map-marked-alt"></i> Ver Mapa</a>
+                        <button onclick="addToCalendar('ceremony')" class="btn btn-secondary"><i class="fas fa-calendar-plus"></i> Agendar</button>
+                    </div>
+                </div>
+
+                <!-- Reception -->
+                <div class="event-card">
+                    <span class="event-icon"><i class="fas fa-glass-cheers"></i></span>
+                    <h3 class="event-title">Recepción</h3>
+                    <div class="event-info">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha</strong>
+                        Sábado, 12 de abril de 2025
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-clock"></i> Hora</strong>
+                        18:30 hrs
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-map-marker-alt"></i> Lugar</strong>
+                        [Nombre del Salón]<br>
+                        La Joya, León, Guanajuato
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" target="_blank" class="btn"><i class="fas fa-map-marked-alt"></i> Ver Mapa</a>
+                        <button onclick="addToCalendar('reception')" class="btn btn-secondary"><i class="fas fa-calendar-plus"></i> Agendar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dress Code -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-tshirt"></i> Código de Vestimenta</h2>
+            <div class="dress-code">
+                <div class="dress-code-icons"><i class="fas fa-user-tie"></i> <i class="fas fa-female"></i></div>
+                <p class="dress-code-text">FORMAL / ELEGANTE</p>
+                <p style="margin-top: 15px; font-size: 1rem; color: var(--cream);">
+                    Te pedimos asistir con vestimenta formal para hacer de esta noche una ocasión aún más especial
+                </p>
+            </div>
+        </section>
+
+        <!-- Mesa de Regalos -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-gift"></i> Mesa de Regalos</h2>
+            <div style="text-align: center; padding: 30px;">
+                <p style="font-size: 1.2rem; color: var(--cream); margin-bottom: 30px;">
+                    Tu presencia es nuestro mejor regalo, pero si deseas obsequiarnos algo,
+                    <br>hemos preparado algunas sugerencias
+                </p>
+                <a href="mesa-regalos.html" class="btn" style="font-size: 1.1rem;">
+                    <i class="fas fa-gift"></i> Ver Mesa de Regalos
+                </a>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Confirma tu Asistencia</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--cream);">
+                Por favor confirma tu asistencia antes del 5 de abril de 2025
+            </p>
+            <div class="rsvp-form">
+                <form id="rsvpForm" onsubmit="submitRSVP(event)">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo *</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="10 dígitos">
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Número de Invitados *</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Selecciona...</option>
+                            <option value="1">1 persona</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="5">5 personas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">¿Confirmas tu asistencia? *</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Selecciona...</option>
+                            <option value="si">Sí, asistiré</option>
+                            <option value="no">No podré asistir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje (Opcional)</label>
+                        <textarea id="message" name="message" placeholder="Déjame un mensaje..."></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar Confirmación</button>
+                    </div>
+                </form>
+                <div id="successMessage" class="success-message">
+                    <i class="fas fa-check-circle"></i> ¡Gracias! Tu confirmación ha sido enviada correctamente.
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-camera"></i> Galería de Fotos</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--cream);">
+                Próximamente se agregarán las fotos de la sesión
+            </p>
+            <div class="gallery-preview" id="galleryPreview">
+                <!-- Preview photos will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Social Share -->
+        <section class="social-share">
+            <h2 class="section-title"><i class="fas fa-share-alt"></i> Comparte</h2>
+            <p style="margin-bottom: 20px; color: var(--cream);">
+                Ayúdame a compartir esta invitación con tus amigos y familiares
+            </p>
+            <div class="social-icons">
+                <a href="#" onclick="shareWhatsApp()" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" onclick="shareFacebook()" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" onclick="shareTwitter()" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" onclick="copyLink()" class="social-icon" title="Copiar enlace"><i class="fas fa-link"></i></a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-sparkles"></i> ¡Nos vemos el 12 de abril! <i class="fas fa-sparkles"></i></p>
+            <div class="divider" style="margin: 20px auto;"></div>
+            <p>Producciones Foro 7</p>
+            <p>Fotografía, Video, Dron e Invitaciones Web</p>
+            <p><i class="fas fa-phone-alt"></i> Contacto: 477-920-3776</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+                © 2025 - Vanessa XV Años
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

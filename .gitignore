@@ -1,0 +1,44 @@
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de backup personales (opcional)
+backups/
+*.backup
+
+# Node modules (si llegas a usarlo)
+node_modules/
+
+# Archivos de Python (para scripts de utilidad)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Archivos de entorno
+.env
+.env.local
+
+# Archivos grandes de medios (descomenta si no quieres subir fotos/videos pesados)
+# images/*.jpg
+# images/*.png
+# audio/*.mp3
+# video/*.mp4

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Fotografía & Video - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/servicios.css">
+</head>
+<body>
+    <div class="admin-container">
+        <a href="../admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+
+        <header class="service-header" style="background: linear-gradient(135deg, #ffe66d, #f9ca24);">
+            <div class="service-icon"><i class="fas fa-camera"></i></div>
+            <h1>Fotografía & Video</h1>
+            <p>Captura los mejores momentos del evento</p>
+        </header>
+
+        <section class="service-section">
+            <h2><i class="fas fa-user"></i> Proveedor: Foro 7 Producciones</h2>
+            <div class="form-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" value="477-920-3776" readonly class="readonly-field">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="contacto@foro7.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Paquete Contratado</label>
+                    <select>
+                        <option>Seleccionar paquete...</option>
+                        <option>Paquete Básico - Foto</option>
+                        <option>Paquete Premium - Foto + Video</option>
+                        <option selected>Paquete Completo - Foto + Video + Dron</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Costo Total</label>
+                        <input type="number" placeholder="$12,000">
+                    </div>
+                    <div class="form-group">
+                        <label>Anticipo Pagado</label>
+                        <input type="number" placeholder="$4,000">
+                    </div>
+                </div>
+                <button class="btn-save"><i class="fas fa-save"></i> Guardar Información</button>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-clipboard-list"></i> Servicios Incluidos</h2>
+            <div class="form-card">
+                <div class="checkbox-group">
+                    <label><input type="checkbox" checked><span>Sesión de fotos pre-evento</span></label>
+                    <label><input type="checkbox" checked><span>Cobertura completa del evento</span></label>
+                    <label><input type="checkbox" checked><span>Video profesional editado</span></label>
+                    <label><input type="checkbox" checked><span>Tomas con dron</span></label>
+                    <label><input type="checkbox"><span>Álbum impreso 30x30cm</span></label>
+                    <label><input type="checkbox" checked><span>Fotos digitales en alta resolución</span></label>
+                    <label><input type="checkbox"><span>Video highlight (3-5 min)</span></label>
+                    <label><input type="checkbox"><span>Video completo del evento</span></label>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-list-ol"></i> Momentos Especiales a Capturar</h2>
+            <div class="form-card">
+                <div class="checkbox-group">
+                    <label><input type="checkbox" checked><span>Preparativos de la quinceañera</span></label>
+                    <label><input type="checkbox" checked><span>Llegada a la ceremonia</span></label>
+                    <label><input type="checkbox" checked><span>Ceremonia religiosa</span></label>
+                    <label><input type="checkbox" checked><span>Vals con el padre</span></label>
+                    <label><input type="checkbox" checked><span>Cambio de zapatillas</span></label>
+                    <label><input type="checkbox" checked><span>Vals sorpresa</span></label>
+                    <label><input type="checkbox" checked><span>Baile con chambelanes</span></label>
+                    <label><input type="checkbox" checked><span>Partida del pastel</span></label>
+                    <label><input type="checkbox" checked><span>Fotos familiares</span></label>
+                    <label><input type="checkbox" checked><span>Fotos con invitados</span></label>
+                </div>
+                <div class="form-group">
+                    <label>Notas Adicionales</label>
+                    <textarea placeholder="Momentos especiales, composiciones específicas, estilo fotográfico..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-calendar-alt"></i> Cronograma de Sesiones</h2>
+            <div class="form-card">
+                <div class="tasting-list">
+                    <div class="tasting-item">
+                        <div class="tasting-info">
+                            <strong>Sesión Pre-Evento</strong>
+                            <p>Programada para: [Fecha a definir]</p>
+                        </div>
+                        <button class="btn-schedule">Agendar</button>
+                    </div>
+                    <div class="tasting-item">
+                        <div class="tasting-info">
+                            <strong>Cobertura del Evento</strong>
+                            <p>12 de abril de 2025 - 17:00 a 02:00 hrs</p>
+                        </div>
+                        <button class="btn-schedule">Confirmar</button>
+                    </div>
+                    <div class="tasting-item">
+                        <div class="tasting-info">
+                            <strong>Entrega de Material</strong>
+                            <p>Estimado: 30 días después del evento</p>
+                        </div>
+                        <button class="btn-schedule">Agendar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../js/servicios.js"></script>
+</body>
+</html>

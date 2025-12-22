@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Invitados - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/servicios.css">
+    <link rel="stylesheet" href="css/invitados.css">
+</head>
+<body>
+    <div class="admin-container">
+        <a href="admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+
+        <header class="service-header" style="background: linear-gradient(135deg, #55efc4, #00b894);">
+            <div class="service-icon"><i class="fas fa-users"></i></div>
+            <h1>Gestión de Invitados</h1>
+            <p>Control completo de confirmaciones y asistencia</p>
+        </header>
+
+        <!-- Statistics Cards -->
+        <section class="service-section">
+            <h2><i class="fas fa-chart-bar"></i> Resumen de Invitados</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #6c5ce7;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Invitados</h3>
+                        <p class="stat-value" id="totalInvitados">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #00b894;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Confirmados</h3>
+                        <p class="stat-value" id="confirmados">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #fdcb6e;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pendientes</h3>
+                        <p class="stat-value" id="pendientes">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #d63031;">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>No Asistirán</h3>
+                        <p class="stat-value" id="noAsistiran">0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters and Search -->
+        <section class="service-section">
+            <div class="filters-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar invitado...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-users"></i> Todos
+                    </button>
+                    <button class="filter-btn" data-filter="confirmado">
+                        <i class="fas fa-check"></i> Confirmados
+                    </button>
+                    <button class="filter-btn" data-filter="pendiente">
+                        <i class="fas fa-clock"></i> Pendientes
+                    </button>
+                    <button class="filter-btn" data-filter="no-asistira">
+                        <i class="fas fa-times"></i> No Asisten
+                    </button>
+                </div>
+                <button class="btn-add-guest" onclick="openAddGuestModal()">
+                    <i class="fas fa-plus"></i> Agregar Invitado
+                </button>
+            </div>
+        </section>
+
+        <!-- Guests Table -->
+        <section class="service-section">
+            <h2><i class="fas fa-list"></i> Lista de Invitados</h2>
+            <div class="table-container">
+                <table class="guests-table" id="guestsTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Pases</th>
+                            <th>Menú</th>
+                            <th>Mesa</th>
+                            <th>Estado</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guestsTableBody">
+                        <!-- Los invitados se cargarán automáticamente aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Category Distribution -->
+        <section class="service-section">
+            <h2><i class="fas fa-chart-pie"></i> Distribución por Categoría</h2>
+            <div class="category-cards">
+                <div class="category-card">
+                    <div class="category-icon" style="background: #e056fd;">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h4>Familia</h4>
+                    <p class="category-count" id="catFamilia">0</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon" style="background: #f39c12;">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Padrinos</h4>
+                    <p class="category-count" id="catPadrinos">0</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon" style="background: #3498db;">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h4>Amigos</h4>
+                    <p class="category-count" id="catAmigos">0</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon" style="background: #1abc9c;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Conocidos</h4>
+                    <p class="category-count" id="catConocidos">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Export Options -->
+        <section class="service-section">
+            <h2><i class="fas fa-download"></i> Exportar Datos</h2>
+            <div class="export-buttons">
+                <button class="btn-export" onclick="exportToExcel()">
+                    <i class="fas fa-file-excel"></i> Exportar a Excel
+                </button>
+                <button class="btn-export" onclick="exportToPDF()">
+                    <i class="fas fa-file-pdf"></i> Exportar a PDF
+                </button>
+                <button class="btn-export" onclick="printList()">
+                    <i class="fas fa-print"></i> Imprimir Lista
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Add/Edit Guest Modal -->
+    <div id="guestModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> <span id="modalTitle">Agregar Invitado</span></h2>
+                <span class="modal-close" onclick="closeGuestModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="guestForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre Completo *</label>
+                            <input type="text" id="guestName" required placeholder="Ej: Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="guestPhone" placeholder="477-XXX-XXXX">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Categoría *</label>
+                            <select id="guestCategory" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="familia">Familia</option>
+                                <option value="padrinos">Padrinos</option>
+                                <option value="amigos">Amigos</option>
+                                <option value="conocidos">Conocidos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Número de Pases *</label>
+                            <input type="number" id="guestPases" min="1" max="10" value="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipo de Menú</label>
+                            <select id="guestMenu">
+                                <option value="regular">Regular</option>
+                                <option value="vegetariano">Vegetariano</option>
+                                <option value="ninos">Niños</option>
+                                <option value="especial">Especial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mesa Asignada</label>
+                            <input type="text" id="guestTable" placeholder="Ej: Mesa 5">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Estado *</label>
+                            <select id="guestStatus" required>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="confirmado">Confirmado</option>
+                                <option value="no-asistira">No Asistirá</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="guestEmail" placeholder="ejemplo@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notas</label>
+                        <textarea id="guestNotes" rows="3" placeholder="Alergias, preferencias, información adicional..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" onclick="closeGuestModal()">Cancelar</button>
+                        <button type="submit" class="btn-save">
+                            <i class="fas fa-save"></i> Guardar Invitado
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data-manager.js"></script>
+    <script src="js/invitados.js"></script>
+</body>
+</html>

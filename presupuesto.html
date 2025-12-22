@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/servicios.css">
+</head>
+<body>
+    <div class="admin-container">
+        <a href="admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+
+        <header class="service-header" style="background: linear-gradient(135deg, #00b894, #00cec9);">
+            <div class="service-icon"><i class="fas fa-calculator"></i></div>
+            <h1>Presupuesto del Evento</h1>
+            <p>Control de gastos y pagos para los XV años</p>
+        </header>
+
+        <!-- Budget Summary -->
+        <section class="service-section">
+            <h2><i class="fas fa-chart-pie"></i> Resumen de Presupuesto</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #6c5ce7;">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Presupuesto Total</h3>
+                        <p class="stat-value" id="totalBudget">$150,000</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #e17055;">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Gastado</h3>
+                        <p class="stat-value" id="totalSpent">$0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #00b894;">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Disponible</h3>
+                        <p class="stat-value" id="remaining">$150,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Progreso del Presupuesto</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget Breakdown -->
+        <section class="service-section">
+            <h2><i class="fas fa-list"></i> Desglose de Gastos</h2>
+            <div class="form-card">
+                <table class="budget-table">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Costo</th>
+                            <th>Anticipo</th>
+                            <th>Pendiente</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-home"></i> Salón</td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$0</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-utensils"></i> Banquete</td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$0</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-camera"></i> Fotografía & Video</td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$0</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-music"></i> Música / DJ</td>
+                            <td><input type="number" class="budget-input" placeholder="$8,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$8,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-paint-brush"></i> Decoración</td>
+                            <td><input type="number" class="budget-input" placeholder="$10,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$10,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-tshirt"></i> Vestido y Accesorios</td>
+                            <td><input type="number" class="budget-input" placeholder="$15,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$15,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-birthday-cake"></i> Pastel</td>
+                            <td><input type="number" class="budget-input" placeholder="$3,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$3,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-envelope"></i> Invitaciones</td>
+                            <td><input type="number" class="budget-input" placeholder="$2,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$2,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-gift"></i> Recuerdos/Souvenirs</td>
+                            <td><input type="number" class="budget-input" placeholder="$3,500"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$3,500</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-church"></i> Ceremonia Religiosa</td>
+                            <td><input type="number" class="budget-input" placeholder="$2,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$2,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-spa"></i> Maquillaje y Peinado</td>
+                            <td><input type="number" class="budget-input" placeholder="$2,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$2,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-plus-circle"></i> Otros Gastos</td>
+                            <td><input type="number" class="budget-input" placeholder="$5,000"></td>
+                            <td><input type="number" class="budget-input" placeholder="$0"></td>
+                            <td class="calculated">$5,000</td>
+                            <td>
+                                <select>
+                                    <option selected>Pendiente</option>
+                                    <option>Apartado</option>
+                                    <option>Pagado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="budget-total">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong id="grandTotal">$0</strong></td>
+                            <td><strong id="totalAdvance">$0</strong></td>
+                            <td><strong id="totalPending">$0</strong></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn-save" style="margin-top: 20px;"><i class="fas fa-save"></i> Guardar Presupuesto</button>
+            </div>
+        </section>
+
+        <!-- Payment Schedule -->
+        <section class="service-section">
+            <h2><i class="fas fa-calendar-check"></i> Calendario de Pagos</h2>
+            <div class="form-card">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Enero 2025</div>
+                            <p><strong>Apartado de salón</strong> - $5,000</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Febrero 2025</div>
+                            <p><strong>Anticipo fotografía</strong> - $4,000</p>
+                            <p><strong>Compra de vestido</strong> - $15,000</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Marzo 2025</div>
+                            <p><strong>Anticipo banquete</strong> - $20,000</p>
+                            <p><strong>Apartado DJ</strong> - $3,000</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Abril 2025 (Pre-evento)</div>
+                            <p><strong>Liquidación salón</strong> - $10,000</p>
+                            <p><strong>Liquidación banquete</strong> - $32,500</p>
+                            <p><strong>Liquidación fotografía</strong> - $8,000</p>
+                            <p><strong>Liquidación DJ</strong> - $5,000</p>
+                            <p><strong>Decoración</strong> - $10,000</p>
+                            <p><strong>Pastel</strong> - $3,000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes -->
+        <section class="service-section">
+            <h2><i class="fas fa-sticky-note"></i> Notas de Presupuesto</h2>
+            <div class="form-card">
+                <div class="form-group">
+                    <label>Notas y Observaciones</label>
+                    <textarea rows="6" placeholder="Agrega notas sobre el presupuesto, negociaciones con proveedores, descuentos obtenidos, etc."></textarea>
+                </div>
+                <button class="btn-save"><i class="fas fa-save"></i> Guardar Notas</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/data-manager.js"></script>
+    <script src="js/presupuesto.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Decoración - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/servicios.css">
+</head>
+<body>
+    <div class="admin-container">
+        <a href="../admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+
+        <header class="service-header" style="background: linear-gradient(135deg, #fd79a8, #e84393);">
+            <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+            <h1>Decoración</h1>
+            <p>Diseño y ambientación del evento</p>
+        </header>
+
+        <section class="service-section">
+            <h2><i class="fas fa-store"></i> Proveedor de Decoración</h2>
+            <div class="form-card">
+                <div class="form-group">
+                    <label>Nombre del Proveedor</label>
+                    <input type="text" placeholder="Ej: Decoraciones Elegantes">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" placeholder="477-XXX-XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Costo Total</label>
+                        <input type="number" placeholder="$10,000">
+                    </div>
+                </div>
+                <button class="btn-save"><i class="fas fa-save"></i> Guardar Información</button>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-palette"></i> Paleta de Colores</h2>
+            <div class="form-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Color Principal</label>
+                        <input type="text" placeholder="Ej: Rosa">
+                    </div>
+                    <div class="form-group">
+                        <label>Color Secundario</label>
+                        <input type="text" placeholder="Ej: Dorado">
+                    </div>
+                    <div class="form-group">
+                        <label>Color de Acento</label>
+                        <input type="text" placeholder="Ej: Blanco">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tema del Evento</label>
+                    <input type="text" placeholder="Ej: Jardín Elegante, Princesa, Moderno, Vintage...">
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-list-check"></i> Elementos de Decoración</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3><i class="fas fa-table"></i> Centros de Mesa</h3>
+                    <textarea placeholder="Descripción:&#10;- Tipo de flores&#10;- Estilo&#10;- Altura&#10;- Cantidad necesaria"></textarea>
+                </div>
+                <div class="menu-card">
+                    <h3><i class="fas fa-church"></i> Ceremonia</h3>
+                    <textarea placeholder="- Arreglo floral altar&#10;- Decoración de bancas&#10;- Alfombra o pasillo&#10;- Elementos especiales"></textarea>
+                </div>
+                <div class="menu-card">
+                    <h3><i class="fas fa-home"></i> Recepción</h3>
+                    <textarea placeholder="- Arco de entrada&#10;- Mesa principal&#10;- Backdrop para fotos&#10;- Iluminación ambiental&#10;- Globos/cortinas"></textarea>
+                </div>
+                <div class="menu-card">
+                    <h3><i class="fas fa-gift"></i> Extras</h3>
+                    <textarea placeholder="- Mesa de regalos&#10;- Candy bar&#10;- Señalética&#10;- Detalles especiales"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-rose"></i> Flores y Arreglos</h2>
+            <div class="form-card">
+                <div class="checkbox-group">
+                    <label><input type="checkbox"><span>Ramo de la quinceañera</span></label>
+                    <label><input type="checkbox"><span>Boutonnière para acompañantes</span></label>
+                    <label><input type="checkbox"><span>Corsage para madres/padrinas</span></label>
+                    <label><input type="checkbox"><span>Arreglos florales para ceremonia</span></label>
+                    <label><input type="checkbox"><span>Centros de mesa</span></label>
+                    <label><input type="checkbox"><span>Decoración de pastel</span></label>
+                </div>
+                <div class="form-group">
+                    <label>Tipos de Flores Preferidas</label>
+                    <textarea placeholder="Ej: Rosas, peonias, hortensias, lirios..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-lightbulb"></i> Iluminación</h2>
+            <div class="form-card">
+                <div class="checkbox-group">
+                    <label><input type="checkbox"><span>Luces cálidas/amarillas</span></label>
+                    <label><input type="checkbox"><span>Luces de colores</span></label>
+                    <label><input type="checkbox"><span>Velas decorativas</span></label>
+                    <label><input type="checkbox"><span>Series de luces LED</span></label>
+                    <label><input type="checkbox"><span>Iluminación para pista de baile</span></label>
+                    <label><input type="checkbox"><span>Spotlights para mesa principal</span></label>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-sticky-note"></i> Notas Adicionales</h2>
+            <div class="form-card">
+                <div class="form-group">
+                    <label>Referencias e Ideas</label>
+                    <textarea rows="6" placeholder="Describe tu visión del evento, referencias de Pinterest, Instagram, etc."></textarea>
+                </div>
+                <button class="btn-save"><i class="fas fa-save"></i> Guardar Notas</button>
+            </div>
+        </section>
+    </div>
+    <script src="../js/servicios.js"></script>
+</body>
+</html>

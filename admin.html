@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Organización - XV Años Vanessa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header-content">
+                <h1><i class="fas fa-tasks"></i> Panel de Organización</h1>
+                <p>XV Años de Vanessa - 12 de Abril 2025</p>
+            </div>
+            <div class="admin-header-actions">
+                <a href="index.html" class="btn-view-invitation" target="_blank">
+                    <i class="fas fa-eye"></i> Ver Invitación
+                </a>
+            </div>
+        </header>
+
+        <!-- Dashboard Stats -->
+        <section class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #e94560;">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Días Restantes</h3>
+                    <p class="stat-value" id="daysRemaining">--</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #00b894;">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Presupuesto</h3>
+                    <p class="stat-value">$0</p>
+                    <small>de $150,000</small>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fdcb6e;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Confirmaciones</h3>
+                    <p class="stat-value">0</p>
+                    <small>de 150 invitados</small>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #6c5ce7;">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Tareas Completadas</h3>
+                    <p class="stat-value">0/20</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Cards -->
+        <section class="nav-cards">
+            <h2 class="section-title"><i class="fas fa-th-large"></i> Gestión de Servicios</h2>
+            <div class="cards-grid">
+                <a href="servicios/banquete.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #ff6b6b;">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Banquete</h3>
+                    <p>Gestionar menú, proveedores y degustaciones</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="servicios/salon.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #4ecdc4;">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Salón</h3>
+                    <p>Reserva, distribución de mesas y capacidad</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="servicios/fotografia.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #ffe66d;">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Fotografía & Video</h3>
+                    <p>Paquetes, horarios y álbumes</p>
+                    <span class="status-badge in-progress">En Proceso</span>
+                </a>
+
+                <a href="servicios/musica.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #a29bfe;">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Música & DJ</h3>
+                    <p>Playlist, equipo de sonido y géneros</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="servicios/decoracion.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #fd79a8;">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Decoración</h3>
+                    <p>Flores, centros de mesa y temática</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="presupuesto.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #00b894;">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Presupuesto</h3>
+                    <p>Control de gastos y pagos</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="itinerario.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #74b9ff;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Itinerario</h3>
+                    <p>Timeline y actividades del evento</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="invitados.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #55efc4;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Invitados</h3>
+                    <p>Gestión completa de confirmaciones</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="mesa-regalos.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #fd79a8;">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Mesa de Regalos</h3>
+                    <p>Lista de regalos y tiendas</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="planos-mesas.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #a29bfe;">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3>Planos de Mesas</h3>
+                    <p>Distribución y asignación</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+
+                <a href="codigos-qr.html" class="nav-card">
+                    <div class="nav-card-icon" style="background: #0984e3;">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3>Códigos QR</h3>
+                    <p>Invitaciones digitales personalizadas</p>
+                    <span class="status-badge pending">Pendiente</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Quick Tasks -->
+        <section class="quick-tasks">
+            <h2 class="section-title"><i class="fas fa-list-check"></i> Tareas Pendientes</h2>
+            <div class="tasks-container">
+                <div class="task-item">
+                    <input type="checkbox" id="task1">
+                    <label for="task1">Confirmar reserva del salón</label>
+                    <span class="task-priority high">Alta</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task2">
+                    <label for="task2">Contratar servicio de banquete</label>
+                    <span class="task-priority high">Alta</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task3">
+                    <label for="task3">Definir menú con el caterer</label>
+                    <span class="task-priority medium">Media</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task4">
+                    <label for="task4">Elegir playlist para el DJ</label>
+                    <span class="task-priority low">Baja</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task5">
+                    <label for="task5">Confirmar decoración con florería</label>
+                    <span class="task-priority medium">Media</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task6">
+                    <label for="task6">Enviar invitaciones digitales</label>
+                    <span class="task-priority high">Alta</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="contact-info">
+            <h2 class="section-title"><i class="fas fa-address-book"></i> Contactos Importantes</h2>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <i class="fas fa-utensils contact-icon"></i>
+                    <h4>Banquete</h4>
+                    <p>Pendiente de contratar</p>
+                    <p><i class="fas fa-phone"></i> ---</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-home contact-icon"></i>
+                    <h4>Salón</h4>
+                    <p>Zona La Joya</p>
+                    <p><i class="fas fa-phone"></i> ---</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-camera contact-icon"></i>
+                    <h4>Foro 7</h4>
+                    <p>Fotografía y Video</p>
+                    <p><i class="fas fa-phone"></i> 477-920-3776</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-music contact-icon"></i>
+                    <h4>DJ / Música</h4>
+                    <p>Pendiente de contratar</p>
+                    <p><i class="fas fa-phone"></i> ---</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="admin-footer">
+            <p>Panel de Organización - XV Años Vanessa 2025</p>
+            <p>Desarrollado por Foro 7 Producciones</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/dashboard-charts.js"></script>
+</body>
+</html>

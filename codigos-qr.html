@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Códigos QR - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/servicios.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+        <header class="service-header" style="background: linear-gradient(135deg, #0984e3, #74b9ff);">
+            <div class="service-icon"><i class="fas fa-qrcode"></i></div>
+            <h1>Códigos QR Personalizados</h1>
+            <p>Invitaciones digitales únicas para cada invitado</p>
+        </header>
+
+        <section class="service-section">
+            <h2><i class="fas fa-link"></i> URL de la Invitación</h2>
+            <div class="form-card">
+                <div class="form-group">
+                    <label>URL Base de la Invitación</label>
+                    <input type="text" id="baseURL" value="https://tudominio.com/xv-vanessa" placeholder="https://tudominio.com/xv-vanessa">
+                    <small style="color: #636e72; display: block; margin-top: 8px;">
+                        Esta es la URL que se compartirá cuando escaneen el código QR
+                    </small>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-qrcode"></i> Generar Código QR</h2>
+            <div class="form-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre del Invitado</label>
+                        <input type="text" id="guestNameQR" placeholder="Ej: Familia Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Pases Asignados</label>
+                        <input type="number" id="guestPases" value="2" min="1" max="10">
+                    </div>
+                </div>
+                <button class="btn-save" onclick="generateQR()">
+                    <i class="fas fa-qrcode"></i> Generar Código QR
+                </button>
+            </div>
+        </section>
+
+        <section class="service-section" id="qrResults" style="display: none;">
+            <h2><i class="fas fa-check-circle"></i> Código QR Generado</h2>
+            <div class="form-card" style="text-align: center;">
+                <h3 id="qrGuestName" style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;"></h3>
+                <div id="qrcode" style="margin: 20px auto; display: inline-block; padding: 20px; background: white; border-radius: 15px;"></div>
+                <p style="margin: 20px 0; color: #636e72; font-size: 1.1rem;">
+                    Pases: <strong id="qrPasesDisplay"></strong>
+                </p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                    <button class="btn-export" onclick="downloadQR()">
+                        <i class="fas fa-download"></i> Descargar QR
+                    </button>
+                    <button class="btn-export" onclick="shareQR()">
+                        <i class="fab fa-whatsapp"></i> Compartir por WhatsApp
+                    </button>
+                    <button class="btn-secondary" onclick="resetQR()">
+                        <i class="fas fa-redo"></i> Generar Otro
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-info-circle"></i> Cómo Usar los Códigos QR</h2>
+            <div class="form-card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="padding: 20px; background: rgba(9, 132, 227, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">
+                            <i class="fas fa-1"></i> Generar
+                        </h4>
+                        <p>Crea un código QR único para cada invitado con su nombre y número de pases</p>
+                    </div>
+                    <div style="padding: 20px; background: rgba(9, 132, 227, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">
+                            <i class="fas fa-2"></i> Compartir
+                        </h4>
+                        <p>Envía el código por WhatsApp o incluye en invitación impresa</p>
+                    </div>
+                    <div style="padding: 20px; background: rgba(9, 132, 227, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">
+                            <i class="fas fa-3"></i> Escanear
+                        </h4>
+                        <p>Los invitados escanean el QR para ver la invitación personalizada</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentQR = null;
+
+        function generateQR() {
+            const guestName = document.getElementById('guestNameQR').value;
+            const pases = document.getElementById('guestPases').value;
+            const baseURL = document.getElementById('baseURL').value;
+
+            if (!guestName) {
+                alert('Por favor ingresa el nombre del invitado');
+                return;
+            }
+
+            const qrURL = `${baseURL}?invitado=${encodeURIComponent(guestName)}&pases=${pases}`;
+
+            document.getElementById('qrcode').innerHTML = '';
+            currentQR = new QRCode(document.getElementById('qrcode'), {
+                text: qrURL,
+                width: 256,
+                height: 256,
+                colorDark: '#c41e3a',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('qrGuestName').textContent = guestName;
+            document.getElementById('qrPasesDisplay').textContent = pases;
+            document.getElementById('qrResults').style.display = 'block';
+            document.getElementById('qrResults').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            const url = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `QR-${document.getElementById('qrGuestName').textContent}.png`;
+            link.href = url;
+            link.click();
+        }
+
+        function shareQR() {
+            const guestName = document.getElementById('qrGuestName').textContent;
+            const baseURL = document.getElementById('baseURL').value;
+            const message = `🎉 ¡Estás invitado(a) a los XV años de Vanessa!\n\n👤 Invitación para: ${guestName}\n🔗 ${baseURL}\n\n¡Te esperamos! 💖`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function resetQR() {
+            document.getElementById('guestNameQR').value = '';
+            document.getElementById('qrcode').innerHTML = '';
+            document.getElementById('qrResults').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

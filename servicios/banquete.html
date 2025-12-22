@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Banquete - XV Años Vanessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/servicios.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Back Button -->
+        <a href="../admin.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Volver al Panel
+        </a>
+
+        <!-- Header -->
+        <header class="service-header" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">
+            <div class="service-icon">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <h1>Gestión de Banquete</h1>
+            <p>Organiza el menú, proveedores y degustaciones</p>
+        </header>
+
+        <!-- Provider Selection -->
+        <section class="service-section">
+            <h2><i class="fas fa-store"></i> Proveedor de Banquete</h2>
+            <div class="form-card">
+                <div class="form-group">
+                    <label>Nombre del Proveedor</label>
+                    <input type="text" placeholder="Ej: Banquetes El Sabor">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" placeholder="477-123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="contacto@banquetes.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Dirección</label>
+                    <input type="text" placeholder="Calle, Colonia, Ciudad">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Costo por Persona</label>
+                        <input type="number" placeholder="$350">
+                    </div>
+                    <div class="form-group">
+                        <label>Número de Personas</label>
+                        <input type="number" placeholder="150">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Total Estimado</label>
+                    <input type="text" value="$52,500" readonly class="readonly-field">
+                </div>
+                <button class="btn-save"><i class="fas fa-save"></i> Guardar Información</button>
+            </div>
+        </section>
+
+        <!-- Menu Planning -->
+        <section class="service-section">
+            <h2><i class="fas fa-clipboard-list"></i> Planificación de Menú</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3><i class="fas fa-salad"></i> Entradas</h3>
+                    <textarea placeholder="- Ensalada mixta&#10;- Crema de champiñones&#10;- Pan artesanal"></textarea>
+                    <button class="btn-secondary"><i class="fas fa-plus"></i> Agregar</button>
+                </div>
+
+                <div class="menu-card">
+                    <h3><i class="fas fa-drumstick-bite"></i> Plato Fuerte</h3>
+                    <textarea placeholder="Opción 1:&#10;- Pollo en salsa de champiñones&#10;- Arroz pilaf&#10;- Vegetales al vapor&#10;&#10;Opción 2:&#10;- Filete de res&#10;- Papas gratinadas&#10;- Ensalada verde"></textarea>
+                    <button class="btn-secondary"><i class="fas fa-plus"></i> Agregar</button>
+                </div>
+
+                <div class="menu-card">
+                    <h3><i class="fas fa-wine-glass"></i> Bebidas</h3>
+                    <textarea placeholder="- Agua de sabores&#10;- Refrescos variados&#10;- Cerveza&#10;- Vino tinto/blanco&#10;- Café"></textarea>
+                    <button class="btn-secondary"><i class="fas fa-plus"></i> Agregar</button>
+                </div>
+
+                <div class="menu-card">
+                    <h3><i class="fas fa-birthday-cake"></i> Postres</h3>
+                    <textarea placeholder="- Pastel de XV años&#10;- Mini postres variados&#10;- Café y té"></textarea>
+                    <button class="btn-secondary"><i class="fas fa-plus"></i> Agregar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasting Schedule -->
+        <section class="service-section">
+            <h2><i class="fas fa-calendar-check"></i> Degustaciones</h2>
+            <div class="form-card">
+                <div class="tasting-list">
+                    <div class="tasting-item">
+                        <div class="tasting-info">
+                            <strong>Primera Degustación</strong>
+                            <p>Pendiente de agendar</p>
+                        </div>
+                        <button class="btn-schedule">Agendar</button>
+                    </div>
+                    <div class="tasting-item">
+                        <div class="tasting-info">
+                            <strong>Degustación Final</strong>
+                            <p>Pendiente de agendar</p>
+                        </div>
+                        <button class="btn-schedule">Agendar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Requirements -->
+        <section class="service-section">
+            <h2><i class="fas fa-exclamation-circle"></i> Requerimientos Especiales</h2>
+            <div class="form-card">
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox">
+                        <span>Menú vegetariano disponible</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span>Menú sin gluten disponible</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span>Menú para niños</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span>Estación de bebidas ilimitadas</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span>Servicio de meseros</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span>Montaje de mesas</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Notas Adicionales</label>
+                    <textarea rows="4" placeholder="Alergias, preferencias especiales, restricciones dietéticas..."></textarea>
+                </div>
+                <button class="btn-save"><i class="fas fa-save"></i> Guardar Requerimientos</button>
+            </div>
+        </section>
+
+        <!-- Contacts -->
+        <section class="service-section">
+            <h2><i class="fas fa-phone"></i> Contactos Relacionados</h2>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <i class="fas fa-utensils contact-icon"></i>
+                    <h4>Banquetes Elegancia</h4>
+                    <p>Especialistas en eventos</p>
+                    <p><i class="fas fa-phone"></i> 477-XXX-XXXX</p>
+                    <button class="btn-contact">Contactar</button>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-utensils contact-icon"></i>
+                    <h4>Catering Premium</h4>
+                    <p>Menús personalizados</p>
+                    <p><i class="fas fa-phone"></i> 477-XXX-XXXX</p>
+                    <button class="btn-contact">Contactar</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="../js/servicios.js"></script>
+</body>
+</html>
