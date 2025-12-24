@@ -24,11 +24,100 @@
       },
       "banquete": {
         "activo": true,
+        "contacto": "Luz Elena Armenta Neri (Producciones LUZEL / Foro 7)",
         "numeroPersonas": null,
+        "paqueteSeleccionado": null,
         "costoPorPersona": null,
         "costoTotal": null,
         "anticipo": null,
         "saldo": null,
+        "cobertura": {
+          "dentroLeon": "Sin cargo extra",
+          "fueraLeon": "Cargo extra según cantidad (San Pancho, Silao, Lago, etc.)"
+        },
+        "paquetesDisponibles": {
+          "completo": {
+            "nombre": "Paquete Completo",
+            "costoPorPersona": 190,
+            "incluye": [
+              "Menú 2 o 3 tiempos",
+              "Pan (cuernito)",
+              "Personal de cocina",
+              "Parrilla para mantener comida caliente",
+              "Refresco y hielo ilimitado por 5 horas",
+              "Mantelería de lujo variedad de colores",
+              "Mesas cuadradas o redondas",
+              "Tablón para regalos",
+              "Sillas Tiffany o Versalles",
+              "Loza y cristalería completa",
+              "Meseros",
+              "Mesas de servicio (cortesía opcional)"
+            ],
+            "adicionales": [
+              "Mobiliario vintage con costo adicional (mesas de madera y sillas crosback)",
+              "Plato base y copa - costo adicional"
+            ]
+          },
+          "menu2Tiempos": {
+            "nombre": "Menú 2 Tiempos",
+            "costoPorPersona": 130,
+            "incluye": [
+              "Loza y cristalería",
+              "Pan",
+              "Personal de cocina",
+              "Parrilla",
+              "Degustación de menú para 4 personas"
+            ],
+            "noIncluye": [
+              "Mobiliario (mesas y sillas)",
+              "Mantelería",
+              "Refrescos e hielos",
+              "Meseros"
+            ]
+          },
+          "menu3Tiempos": {
+            "nombre": "Menú 3 Tiempos",
+            "costoPorPersona": 140,
+            "incluye": [
+              "Loza y cristalería",
+              "Pan",
+              "Personal de cocina",
+              "Parrilla",
+              "Degustación de menú para 4 personas"
+            ],
+            "noIncluye": [
+              "Mobiliario (mesas y sillas)",
+              "Mantelería",
+              "Refrescos e hielos",
+              "Meseros"
+            ]
+          }
+        },
+        "mobiliario": {
+          "mesaCompleta": {
+            "descripcion": "Mesa cuadrada o redonda con 10 sillas tiffany o versalles y mantel sencillo (blanco, gris, uva, chocolate)",
+            "precio": 360
+          },
+          "mesaNegra": {
+            "descripcion": "10 Sillas negras con vestidura, mesa y mantel",
+            "precio": 320
+          },
+          "cubreMantel": {
+            "precio": 40,
+            "nota": "Se puede poner solo mantel de color y no ocupa cubremantel"
+          },
+          "mantelLujo": {
+            "descripcion": "Mantel de lujo",
+            "precioDesde": 150
+          }
+        },
+        "loza": {
+          "plato": 4,
+          "vaso": 4,
+          "servilleta": 3,
+          "tenedor": 2,
+          "cuchillo": 2
+        },
         "menu": {
           "entradas": null,
           "platoFuerte": null,
@@ -45,7 +134,38 @@
           "estacionBebidas": null
         },
         "restricciones": null,
-        "notasAdicionales": null
+        "notasAdicionales": null,
+        "telefonos": {
+          "fijo": "477-791-5394",
+          "celular": "477-228-0761"
+        },
+        "menuDetallado": {
+          "banqueteFormal": {
+            "platoFuerte": [
+              "Milanesa de pollo rellena (jamón, queso amarillo, queso asadero)",
+              "Pierna en su gravy",
+              "Lomo en crema de champiñones"
+            ],
+            "pasta": [
+              "Salchicha",
+              "Jamón",
+              "Calabacita y zanahoria",
+              "A la crema"
+            ],
+            "guarnicion": [
+              "Zanahoria y brócoli",
+              "Ensalada verde (lechuga, espinacas, acelgas, pepino)",
+              "Puré de papa"
+            ],
+            "botana": [
+              "Carnes frías"
+            ],
+            "pan": [
+              "Cuernitos",
+              "Bolillo"
+            ]
+          }
+        }
       },
       "musica": {
         "activo": true,
@@ -110,90 +230,6 @@
     "iglesia": {
       "donativo": null,
       "fechaPago": null
-    }
-  },
-  "proveedoresAlternativos": {
-    "banqueteLuzElena": {
-      "nombre": "Luz Elena Armenta Neri",
-      "telefono": null,
-      "email": null,
-      "ubicacion": "León, Guanajuato",
-      "cobertura": {
-        "dentroLeon": "Sin cargo extra",
-        "fueraLeon": "Cargo extra según cantidad (San Pancho, Silao, Lago, etc.)"
-      },
-      "paquetes": {
-        "completo": {
-          "nombre": "Paquete Completo",
-          "costoPorPersona": 190,
-          "incluye": [
-            "Menú 2 o 3 tiempos",
-            "Pan (cuernito)",
-            "Personal de cocina",
-            "Parrilla para mantener comida caliente",
-            "Refresco y hielo ilimitado por 5 horas",
-            "Mantelería de lujo variedad de colores",
-            "Mesas cuadradas o redondas",
-            "Tablón para regalos",
-            "Sillas Tiffany o Versalles",
-            "Loza y cristalería completa",
-            "Meseros",
-            "Mesas de servicio (cortesía opcional)"
-          ],
-          "adicionales": [
-            "Mobiliario vintage con costo adicional (mesas de madera y sillas crosback)",
-            "Plato base y copa - costo adicional"
-          ]
-        },
-        "menu2Tiempos": {
-          "nombre": "Menú 2 Tiempos",
-          "costoPorPersona": 130,
-          "incluye": [
-            "Loza y cristalería",
-            "Pan",
-            "Personal de cocina",
-            "Parrilla",
-            "Degustación de menú para 4 personas"
-          ]
-        },
-        "menu3Tiempos": {
-          "nombre": "Menú 3 Tiempos",
-          "costoPorPersona": 140,
-          "incluye": [
-            "Loza y cristalería",
-            "Pan",
-            "Personal de cocina",
-            "Parrilla",
-            "Degustación de menú para 4 personas"
-          ]
-        }
-      },
-      "mobiliario": {
-        "mesaCompleta": {
-          "descripcion": "Mesa cuadrada o redonda con 10 sillas tiffany o versalles y mantel sencillo (blanco, gris, uva, chocolate)",
-          "precio": 360
-        },
-        "mesaNegra": {
-          "descripcion": "10 Sillas negras con vestidura, mesa y mantel",
-          "precio": 320
-        },
-        "cubreMantel": {
-          "precio": 40,
-          "nota": "Se puede poner solo mantel de color y no ocupa cubremantel"
-        },
-        "mantelLujo": {
-          "descripcion": "Mantel de lujo",
-          "precioDesde": 150
-        }
-      },
-      "loza": {
-        "plato": 4,
-        "vaso": 4,
-        "servilleta": 3,
-        "tenedor": 2,
-        "cuchillo": 2
-      },
-      "seleccionado": false
     }
   }
 }
