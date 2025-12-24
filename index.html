@@ -265,52 +265,39 @@
                 const eventoData = await dataLoader.loadJSON('data/evento.json');
                 
                 if (eventoData) {
-                    // Update church name
-                    if (eventoData.ubicaciones.iglesia.nombre) {
-                        document.getElementById('churchName').textContent = eventoData.ubicaciones.iglesia.nombre;
-                    }
-                    
-                    // Update salon name
-                    if (eventoData.ubicaciones.salon.nombre) {
-                        document.getElementById('salonName').textContent = eventoData.ubicaciones.salon.nombre;
-                    }
-                    
-                    // Update mother name
-                    if (eventoData.padres.madre) {
-                        document.getElementById('motherName').textContent = eventoData.padres.madre;
-                    }
-                    
-                    // Update father name
-                    if (eventoData.padres.padre) {
-                        document.getElementById('fatherName').textContent = eventoData.padres.padre;
-                    }
-                    
-                    // Update padrinos
-                    if (eventoData.padrinos.padrino) {
-                        document.getElementById('padrinoName').textContent = eventoData.padrinos.padrino;
-                    }
-                    
-                    if (eventoData.padrinos.madrina) {
-                        document.getElementById('madrinaName').textContent = eventoData.padrinos.madrina;
-                    }
-                    
+                    // Safe update function
+                    const safeUpdate = (id, value) => {
+                        const el = document.getElementById(id);
+                        if (el && value) el.textContent = value;
+                    };
+
+                    // Update all elements safely
+                    safeUpdate('churchName', eventoData.ubicaciones?.iglesia?.nombre);
+                    safeUpdate('salonName', eventoData.ubicaciones?.salon?.nombre);
+                    safeUpdate('motherName', eventoData.padres?.madre);
+                    safeUpdate('fatherName', eventoData.padres?.padre);
+                    safeUpdate('padrinoName', eventoData.padrinos?.padrino);
+                    safeUpdate('madrinaName', eventoData.padrinos?.madrina);
+
                     // Update dates
-                    if (eventoData.fechas.evento) {
+                    if (eventoData.fechas?.evento) {
                         const fecha = new Date(eventoData.fechas.evento + 'T12:00:00');
                         const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                         const fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
                         const fechaCapitalizada = fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);
-                        
+
                         // Update all date displays
-                        const dateElements = document.querySelectorAll('#eventDate');
-                        dateElements.forEach(el => el.textContent = fechaCapitalizada);
-                        
+                        document.querySelectorAll('#eventDate').forEach(el => {
+                            if (el) el.textContent = fechaCapitalizada;
+                        });
+
                         // Update footer date
-                        const dia = fecha.getDate();
-                        const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
-                                      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-                        const mes = meses[fecha.getMonth()];
-                        document.getElementById('footerDate').textContent = dia + ' de ' + mes;
+                        const footerEl = document.getElementById('footerDate');
+                        if (footerEl) {
+                            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                                          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                            footerEl.textContent = fecha.getDate() + ' de ' + meses[fecha.getMonth()];
+                        }
                     }
                     
                     console.log('✓ Datos del evento cargados correctamente');
