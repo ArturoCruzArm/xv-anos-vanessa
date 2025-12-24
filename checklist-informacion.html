@@ -213,7 +213,44 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        .data-complete {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .data-pending {
+            color: #e74c3c;
+        }
+        .data-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
     </style>
+
 </head>
 <body>
     <div class="admin-container">
@@ -252,7 +289,7 @@
             <div class="info-category">
                 <h3><i class="fas fa-user"></i> Datos de la Quinceañera</h3>
                 <ul class="info-list">
-                    <li><i class="fas fa-check"></i> <strong>Nombre completo</strong> de la quinceañera <span class="priority-badge badge-alta">ALTA</span></li>
+                    <li><i class="fas fa-check"></i> <strong>Nombre completo:</strong> <span id="nombreQuinceañera">Cargando...</span> <span class="priority-badge badge-alta">ALTA</span></li>
                     <li><i class="fas fa-check"></i> <strong>Edad / Fecha de nacimiento</strong> (opcional para cuenta especial)</li>
                     <li><i class="fas fa-check"></i> <strong>Fotos para la galería</strong> (sesión fotográfica pre-evento) <span class="priority-badge badge-alta">ALTA</span></li>
                     <li class="optional"><i class="fas fa-check"></i> <strong>Frase o mensaje especial</strong> para la invitación</li>
@@ -274,7 +311,7 @@
                 <ul class="info-list">
                     <li class="important"><i class="fas fa-exclamation-triangle"></i> <strong>Fecha exacta del evento</strong> (DD/MM/AAAA) <span class="priority-badge badge-alta">ALTA</span></li>
                     <li><i class="fas fa-check"></i> <strong>Hora de la ceremonia religiosa</strong> (si aplica)</li>
-                    <li><i class="fas fa-check"></i> <strong>Hora de la recepción</strong> <span class="priority-badge badge-alta">ALTA</span></li>
+                    <li><i class="fas fa-check"></i> <strong>Hora de la recepción:</strong> <span id="horaRecepcion">Cargando...</span> <span class="priority-badge badge-alta">ALTA</span></li>
                     <li><i class="fas fa-check"></i> <strong>Hora estimada de finalización</strong></li>
                 </ul>
             </div>
@@ -585,6 +622,110 @@
                 </a>
             </div>
         </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="btn-whatsapp" onclick="enviarInfoPendiente()">
+                <i class="fab fa-whatsapp"></i>
+                Enviar Información Pendiente por WhatsApp
+            </button>
+            <p style="color: #666; font-size: 14px;">
+                Se enviarán solo los datos que hayas completado en los campos pendientes
+            </p>
+        </div>
     </div>
+
+    <script src="js/data-loader.js"></script>
+    <script src="js/whatsapp-sender.js"></script>
+    <script>
+        let eventoData = null;
+        let serviciosData = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Cargando checklist...');
+            
+            // Load both JSON files
+            eventoData = await dataLoader.loadJSON('data/evento.json');
+            serviciosData = await dataLoader.loadJSON('data/servicios.json');
+
+            if (eventoData && serviciosData) {
+                updateChecklist();
+                console.log('Checklist cargado');
+            }
+        });
+
+        function updateChecklist() {
+            // Update with actual data
+            updateField('nombreQuinceañera', eventoData.quinceañera?.nombre);
+            updateField('nombreMadre', eventoData.padres?.madre);
+            updateField('nombrePadre', eventoData.padres?.padre);
+            updateField('fechaEvento', eventoData.fechas?.evento);
+            updateField('horaMisa', eventoData.fechas?.horaMisa);
+            updateField('horaRecepcion', eventoData.fechas?.horaRecepcion);
+            updateField('nombreIglesia', eventoData.ubicaciones?.iglesia?.nombre);
+            updateField('direccionIglesia', eventoData.ubicaciones?.iglesia?.direccion);
+            updateField('nombreSalon', eventoData.ubicaciones?.salon?.nombre);
+            updateField('direccionSalon', eventoData.ubicaciones?.salon?.direccion);
+            updateField('numeroInvitados', eventoData.invitados?.numeroEstimado);
+        }
+
+        function updateField(id, value) {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            if (value) {
+                el.innerHTML = '<span class="data-complete">✓ ' + value + '</span>';
+            } else {
+                el.innerHTML = '<span class="data-pending">⚠ Pendiente</span><input type="text" class="data-input" data-field="' + id + '" placeholder="Ingresa el dato...">';
+            }
+        }
+
+        function enviarInfoPendiente() {
+            const pendingData = {};
+            const inputs = document.querySelectorAll('.data-input');
+            
+            inputs.forEach(input => {
+                if (input.value.trim()) {
+                    const field = input.getAttribute('data-field');
+                    pendingData[field] = input.value.trim();
+                }
+            });
+
+            if (Object.keys(pendingData).length === 0) {
+                alert('No hay información nueva para enviar');
+                return;
+            }
+
+            let mensaje = '📋 *INFORMACIÓN PENDIENTE - XV AÑOS BARBARA BRITTANY*
+
+';
+            mensaje += '*Datos capturados:*
+
+';
+
+            for (const [field, value] of Object.entries(pendingData)) {
+                const labels = {
+                    'nombreQuinceañera': 'Nombre quinceañera',
+                    'nombreMadre': 'Nombre madre',
+                    'nombrePadre': 'Nombre padre',
+                    'fechaEvento': 'Fecha del evento',
+                    'horaMisa': 'Hora de la misa',
+                    'horaRecepcion': 'Hora de recepción',
+                    'nombreIglesia': 'Nombre iglesia',
+                    'direccionIglesia': 'Dirección iglesia',
+                    'nombreSalon': 'Nombre salón',
+                    'direccionSalon': 'Dirección salón',
+                    'numeroInvitados': 'Número de invitados'
+                };
+                mensaje += '▸ *' + labels[field] + ':* ' + value + '
+';
+            }
+
+            mensaje += '
+_Por favor actualizar los archivos JSON en GitHub_';
+
+            const url = 'https://wa.me/524779203776?text=' + encodeURIComponent(mensaje);
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
