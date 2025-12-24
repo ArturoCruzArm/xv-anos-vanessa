@@ -695,12 +695,8 @@
                 return;
             }
 
-            let mensaje = '📋 *INFORMACIÓN PENDIENTE - XV AÑOS BARBARA BRITTANY*
-
-';
-            mensaje += '*Datos capturados:*
-
-';
+            let mensaje = '📋 *INFORMACIÓN PENDIENTE - XV AÑOS BARBARA BRITTANY*\n\n';
+            mensaje += '*Datos capturados:*\n\n';
 
             for (const [field, value] of Object.entries(pendingData)) {
                 const labels = {
@@ -716,12 +712,10 @@
                     'direccionSalon': 'Dirección salón',
                     'numeroInvitados': 'Número de invitados'
                 };
-                mensaje += '▸ *' + labels[field] + ':* ' + value + '
-';
+                mensaje += '▸ *' + labels[field] + ':* ' + value + '\n';
             }
 
-            mensaje += '
-_Por favor actualizar los archivos JSON en GitHub_';
+            mensaje += '\n_Por favor actualizar los archivos JSON en GitHub_';
 
             const url = 'https://wa.me/524779203776?text=' + encodeURIComponent(mensaje);
             window.open(url, '_blank');
