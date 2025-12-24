@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/servicios.css">
+    <style>
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+    </style>
 </head>
 <body>
     <div class="admin-container">
@@ -28,7 +52,7 @@
         <!-- Provider Selection -->
         <section class="service-section">
             <h2><i class="fas fa-store"></i> Proveedor de Banquete</h2>
-            <div class="form-card">
+            <div class="form-card" id="formBanquete">
                 <div class="form-group">
                     <label>Nombre del Proveedor</label>
                     <input type="text" value="Producciones Foro 7" readonly class="readonly-field">
@@ -45,21 +69,21 @@
                 </div>
                 <div class="form-group">
                     <label>Dirección</label>
-                    <input type="text" placeholder="Calle, Colonia, Ciudad">
+                    <input type="text" value="Padilla 112, Cumbres de Arbide, León" readonly class="readonly-field">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Costo por Persona</label>
-                        <input type="number" placeholder="$350">
+                        <input type="number" id="costoPorPersona" placeholder="$350" data-json-path="foro7.banquete.costoPorPersona" data-label="💰 Costo por persona">
                     </div>
                     <div class="form-group">
                         <label>Número de Personas</label>
-                        <input type="number" placeholder="150">
+                        <input type="number" id="numeroPersonas" placeholder="150" data-json-path="foro7.banquete.numeroPersonas" data-label="👥 Número de personas">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Total Estimado</label>
-                    <input type="text" value="$52,500" readonly class="readonly-field">
+                    <input type="text" id="totalEstimado" readonly class="readonly-field">
                 </div>
                 <button class="btn-save"><i class="fas fa-save"></i> Guardar Información</button>
             </div>
@@ -178,6 +202,19 @@
         </section>
     </div>
 
+    <script src="../js/data-loader.js"></script>
+    <script src="../js/whatsapp-sender.js"></script>
     <script src="../js/servicios.js"></script>
+    <script>
+        let serviciosData = null;
+        document.addEventListener('DOMContentLoaded', async () => {
+            serviciosData = await dataLoader.loadJSON('../data/servicios.json');
+            if (serviciosData) {
+                dataLoader.populateForm('formBanquete', serviciosData);
+                dataLoader.initAutoSave('formBanquete', 'banquete', serviciosData);
+                console.log('Banquete loaded');
+            }
+        });
+    </script>
 </body>
 </html>
