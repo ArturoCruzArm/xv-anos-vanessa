@@ -1,7 +1,7 @@
 // Countdown Timer
 function updateCountdown() {
     // Fecha del evento: 12 de abril de 2025 a las 17:00 hrs
-    const eventDate = new Date(2025, 3, 12, 17, 0, 0).getTime(); // Mes 3 = Abril (0-indexed)
+    const eventDate = new Date(2025, 3, 12, 16, 0, 0).getTime(); // Mes 3 = Abril (0-indexed)
     const now = new Date().getTime();
     const distance = eventDate - now;
 

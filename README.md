@@ -1,6 +1,6 @@
-# XV Años - Vanessa
+# XV Años - Barbara Brittany
 
-Sistema completo de invitación web y gestión de eventos para los XV años de Vanessa.
+Sistema completo de invitación web y gestión de eventos para los XV años de Barbara Brittany.
 
 ## 📋 Descripción
 
@@ -211,7 +211,7 @@ Cada servicio tiene su propia página con:
 
 ## 📊 Información del Evento
 
-- **Quinceañera:** Vanessa
+- **Quinceañera:** Barbara Brittany
 - **Fecha:** 12 de Abril de 2025
 - **Hora Ceremonia:** 17:00 hrs
 - **Hora Recepción:** 18:30 hrs
