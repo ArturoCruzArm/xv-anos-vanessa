@@ -1,0 +1,31 @@
+{
+  "sitio": {
+    "titulo": "XV Años Barbara Brittany",
+    "subtitulo": "Celebra con nosotros",
+    "urlGitHub": "https://github.com/arturocruzarm/xv-anos-vanessa",
+    "urlSitio": "https://arturocruzarm.github.io/xv-anos-vanessa/",
+    "ultimaActualizacion": "2024-12-24"
+  },
+  "whatsapp": {
+    "numero": "4779203776",
+    "numeroInternacional": "524779203776",
+    "mensajePredeterminado": "Hola, tengo una consulta sobre los XV años de Barbara Brittany"
+  },
+  "administrador": {
+    "email": "foro7.arturocruz@gmail.com",
+    "nombre": "Producciones Foro 7",
+    "telefono": "477-920-3776"
+  },
+  "almacenamiento": {
+    "usarLocalStorage": true,
+    "prefijoKeys": "xv-barbara-",
+    "autoGuardado": true,
+    "intervaloAutoGuardado": 2000
+  },
+  "opciones": {
+    "mostrarPreciosPublicos": false,
+    "permitirRSVPPublico": true,
+    "mostrarContadorDias": true,
+    "mostrarGaleria": true
+  }
+}

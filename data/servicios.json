@@ -1,0 +1,115 @@
+{
+  "foro7": {
+    "nombre": "Producciones Foro 7",
+    "telefono": "477-920-3776",
+    "email": "foro7.arturocruz@gmail.com",
+    "direccion": "Padilla 112, Cumbres de Arbide, León",
+    "servicios": {
+      "fotografia": {
+        "activo": true,
+        "paquete": null,
+        "costo": null,
+        "anticipo": null,
+        "saldo": null,
+        "detalles": {
+          "sesionPreEvento": null,
+          "fechaSesionPreEvento": null,
+          "coberturaCompleta": true,
+          "videoProfesional": true,
+          "dron": true,
+          "fotosDigitales": true,
+          "album": null,
+          "estiloFotografico": null
+        }
+      },
+      "banquete": {
+        "activo": true,
+        "numeroPersonas": null,
+        "costoPorPersona": null,
+        "costoTotal": null,
+        "anticipo": null,
+        "saldo": null,
+        "menu": {
+          "entradas": null,
+          "platoFuerte": null,
+          "bebidas": null,
+          "postres": null,
+          "menuVegetariano": false,
+          "menuSinGluten": false,
+          "menuNinos": false
+        },
+        "servicios": {
+          "meseros": true,
+          "montajeMesas": true,
+          "bebidasIlimitadas": null,
+          "estacionBebidas": null
+        },
+        "restricciones": null,
+        "notasAdicionales": null
+      },
+      "musica": {
+        "activo": true,
+        "costo": null,
+        "anticipo": null,
+        "saldo": null,
+        "horarioInicio": null,
+        "horarioFin": null,
+        "equipo": {
+          "sonidoProfesional": true,
+          "iluminacionLED": null,
+          "lucesRoboticas": null,
+          "maquinaHumo": null,
+          "pantallaProyeccion": null,
+          "microfonoInalambrico": null
+        },
+        "playlist": {
+          "valsPadre": null,
+          "valsSorpresa": null,
+          "chambelanes": null,
+          "entradaQuinceañera": null,
+          "musicaRecepcion": null,
+          "generosFiesta": null,
+          "noReproducir": null
+        },
+        "instruccionesEspeciales": null
+      },
+      "decoracion": {
+        "activo": true,
+        "costo": null,
+        "anticipo": null,
+        "saldo": null,
+        "colores": {
+          "principal": null,
+          "secundario": null,
+          "acento": null
+        },
+        "tema": null,
+        "conceptoDecorativo": null,
+        "elementos": {
+          "centrosMesa": null,
+          "flores": null,
+          "iluminacion": null,
+          "globos": null,
+          "cortinas": null,
+          "backdrop": null
+        },
+        "notasEspeciales": null
+      }
+    }
+  },
+  "externos": {
+    "salon": {
+      "proveedor": null,
+      "telefono": null,
+      "email": null,
+      "costo": null,
+      "anticipo": null,
+      "saldo": null,
+      "fechaPago": null
+    },
+    "iglesia": {
+      "donativo": null,
+      "fechaPago": null
+    }
+  }
+}

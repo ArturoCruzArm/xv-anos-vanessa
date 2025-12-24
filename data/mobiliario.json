@@ -1,0 +1,103 @@
+{
+  "proveedor": {
+    "nombre": "Producciones Foro 7",
+    "telefono": "477-920-3776",
+    "email": "foro7.arturocruz@gmail.com",
+    "direccion": "Padilla 112, Cumbres de Arbide, León"
+  },
+  "catalogoMobiliario": {
+    "basico": [
+      {
+        "id": "mesa-redonda",
+        "item": "Mesas redondas",
+        "descripcion": "Mesa redonda para 10 personas",
+        "precio": 80,
+        "unidad": "pieza"
+      },
+      {
+        "id": "mantel-blanco",
+        "item": "Manteles blancos redondos",
+        "descripcion": "Mantel blanco para mesa redonda",
+        "precio": 80,
+        "unidad": "pieza"
+      },
+      {
+        "id": "cubremantel",
+        "item": "Cubre manteles de color",
+        "descripcion": "Cubremantel de color para mesa",
+        "precio": 50,
+        "unidad": "pieza"
+      },
+      {
+        "id": "silla-tiffany",
+        "item": "Sillas Tiffany blanca con cojín",
+        "descripcion": "Silla Tiffany blanca con cojín",
+        "precio": 23,
+        "unidad": "pieza"
+      }
+    ],
+    "xvAnos": [
+      {
+        "id": "sillon-xv",
+        "item": "Sillón XV años",
+        "descripcion": "Sillón especial para la quinceañera",
+        "precio": 650,
+        "unidad": "pieza"
+      },
+      {
+        "id": "mesa-xv",
+        "item": "Mesa XV años vintage chica",
+        "descripcion": "Mesa decorativa vintage para XV años",
+        "precio": 750,
+        "unidad": "pieza"
+      },
+      {
+        "id": "letras-gigantes",
+        "item": "Letras gigantes nombre de la festejada",
+        "descripcion": "Letras decorativas con nombre",
+        "precio": 650,
+        "unidad": "set"
+      }
+    ],
+    "carpas": [
+      {
+        "id": "carpa-10x12",
+        "item": "Carpa 10x12 metros",
+        "descripcion": "Lujo a 3 mtrs de altura, plafón tipo árabe, candiles para luz, patas forradas en tela",
+        "precio": 4900,
+        "unidad": "pieza"
+      },
+      {
+        "id": "carpa-12x6",
+        "item": "Carpa 12x6 metros",
+        "descripcion": "Lujo a 3 mtrs de altura, plafón tipo árabe, candiles para luz, patas forradas en tela",
+        "precio": 2000,
+        "unidad": "pieza"
+      }
+    ],
+    "decoracion": [
+      {
+        "id": "cortina-10m",
+        "item": "Cortinas de 10 metros",
+        "descripcion": "Cortinas decorativas de 10 metros",
+        "precio": 500,
+        "unidad": "pieza"
+      },
+      {
+        "id": "cortina-6m",
+        "item": "Cortinas de 6 metros",
+        "descripcion": "Cortinas decorativas de 6 metros",
+        "precio": 200,
+        "unidad": "pieza"
+      }
+    ]
+  },
+  "cotizaciones": [],
+  "notasImportantes": [
+    "Precios sujetos a disponibilidad y fecha del evento",
+    "Se requiere anticipo para apartar el mobiliario",
+    "Montaje y desmontaje incluidos",
+    "Instalación el día del evento",
+    "Área de cobertura: León y alrededores"
+  ]
+}

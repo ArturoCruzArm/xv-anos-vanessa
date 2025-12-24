@@ -1,0 +1,53 @@
+{
+  "quinceañera": {
+    "nombre": "Barbara Brittany",
+    "edad": null,
+    "fechaNacimiento": null
+  },
+  "padres": {
+    "madre": "Patricia",
+    "padre": null
+  },
+  "padrinos": {
+    "padrino": null,
+    "madrina": null
+  },
+  "fechas": {
+    "evento": "2025-04",
+    "diaEvento": null,
+    "horaMisa": "16:00",
+    "horaRecepcion": null,
+    "confirmacionLimite": null
+  },
+  "ubicaciones": {
+    "iglesia": {
+      "nombre": null,
+      "direccion": null,
+      "padre": null,
+      "telefono": null,
+      "costo": null
+    },
+    "salon": {
+      "nombre": null,
+      "direccion": null,
+      "contacto": null,
+      "telefono": null,
+      "capacidad": null,
+      "costo": null,
+      "anticipo": null,
+      "horarioInicio": null,
+      "horarioFin": null,
+      "serviciosIncluidos": null,
+      "restricciones": null
+    }
+  },
+  "contacto": {
+    "whatsapp": "4779203776",
+    "whatsappFormat": "524779203776",
+    "emailContacto": null
+  },
+  "invitados": {
+    "numeroEstimado": null,
+    "numeroConfirmado": 0
+  }
+}
