@@ -1,7 +1,7 @@
 // Countdown Timer
 function updateCountdown() {
-    // Fecha del evento: 12 de abril de 2025 a las 17:00 hrs
-    const eventDate = new Date(2025, 3, 12, 16, 0, 0).getTime(); // Mes 3 = Abril (0-indexed)
+    // Fecha del evento: 11 de abril de 2025 a las 16:00 hrs
+    const eventDate = new Date(2025, 3, 11, 16, 0, 0).getTime(); // Mes 3 = Abril (0-indexed)
     const now = new Date().getTime();
     const distance = eventDate - now;
 
@@ -26,14 +26,14 @@ updateCountdown();
 
 // Add to Calendar
 function addToCalendar(type) {
-    const title = type === 'ceremony' ? 'XV Años Vanessa - Ceremonia' : 'XV Años Vanessa - Recepción';
+    const title = type === 'ceremony' ? 'XV Años Barbara Brittany - Ceremonia' : 'XV Años Barbara Brittany - Recepción';
     const location = type === 'ceremony'
         ? 'La Joya, León, Guanajuato'
         : 'La Joya, León, Guanajuato';
-    const startTime = type === 'ceremony' ? '20250412T170000' : '20250412T183000';
-    const endTime = type === 'ceremony' ? '20250412T180000' : '20250413T020000';
+    const startTime = type === 'ceremony' ? '20250411T160000' : '20250411T183000';
+    const endTime = type === 'ceremony' ? '20250411T170000' : '20250412T020000';
 
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent('XV Años de Vanessa')}&location=${encodeURIComponent(location)}`;
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent('XV Años de Barbara Brittany')}&location=${encodeURIComponent(location)}`;
 
     window.open(googleCalendarUrl, '_blank');
 }
@@ -50,7 +50,7 @@ function submitRSVP(event) {
     const message = formData.get('message') || 'Sin mensaje';
 
     const whatsappMessage = `
-✨ CONFIRMACIÓN XV AÑOS - VANESSA ✨
+✨ CONFIRMACIÓN XV AÑOS - BARBARA BRITTANY ✨
 
 👤 Nombre: ${name}
 📱 Teléfono: ${phone}
@@ -58,7 +58,7 @@ function submitRSVP(event) {
 ✅ Asistencia: ${attendance === 'si' ? 'Sí asistiré' : 'No podré asistir'}
 💬 Mensaje: ${message}
 
-📅 Fecha: 12 de abril de 2025
+📅 Fecha: 11 de abril de 2025
     `.trim();
 
     // Actualizar con el número correcto de WhatsApp
@@ -75,7 +75,7 @@ function submitRSVP(event) {
 
 // Social Sharing
 function shareWhatsApp() {
-    const text = '¡Estás invitado a mis XV años! 👑✨ - Vanessa - 12 de abril de 2025';
+    const text = '¡Estás invitado a mis XV años! 👑✨ - Barbara Brittany - 11 de abril de 2025';
     const url = window.location.href;
     window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
 }
@@ -86,7 +86,7 @@ function shareFacebook() {
 }
 
 function shareTwitter() {
-    const text = '¡Estás invitado a mis XV años! 👑✨ - Vanessa - 12 de abril de 2025';
+    const text = '¡Estás invitado a mis XV años! 👑✨ - Barbara Brittany - 11 de abril de 2025';
     const url = window.location.href;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
 }
