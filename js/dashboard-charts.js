@@ -176,34 +176,118 @@ function createGuestsChart() {
 
 function createTasksProgress() {
     const tasksCtx = document.getElementById('tasksChart');
-    if (!tasksCtx || typeof Chart === 'undefined') return;
+    if (!tasksCtx || typeof Chart === 'undefined') {
+        console.warn('tasksChart canvas no encontrado o Chart.js no cargado');
+        return;
+    }
 
     // Calcular información completa vs pendiente
     let completados = 0;
     let pendientes = 0;
 
-    // Analizar datos de evento.json
+    console.log('Analizando datos para gráfica de información...');
+
+    // Analizar datos de evento.json - CAMPOS PRINCIPALES
     if (eventoData) {
-        // Contar campos completados vs null
-        const campos = [
-            eventoData.quinceañera?.nombre,
-            eventoData.padres?.madre,
-            eventoData.padres?.padre,
-            eventoData.padrinos?.padrino,
-            eventoData.padrinos?.madrina,
-            eventoData.fechas?.evento,
-            eventoData.fechas?.horaMisa,
-            eventoData.fechas?.horaRecepcion,
-            eventoData.ubicaciones?.iglesia?.nombre,
-            eventoData.ubicaciones?.salon?.nombre
+        const camposEvento = [
+            { nombre: 'Nombre quinceañera', valor: eventoData.quinceañera?.nombre },
+            { nombre: 'Madre', valor: eventoData.padres?.madre },
+            { nombre: 'Padre', valor: eventoData.padres?.padre },
+            { nombre: 'Padrino', valor: eventoData.padrinos?.padrino },
+            { nombre: 'Madrina', valor: eventoData.padrinos?.madrina },
+            { nombre: 'Fecha evento', valor: eventoData.fechas?.evento },
+            { nombre: 'Hora misa', valor: eventoData.fechas?.horaMisa },
+            { nombre: 'Hora recepción', valor: eventoData.fechas?.horaRecepcion },
+            { nombre: 'Fecha límite RSVP', valor: eventoData.fechas?.confirmacionLimite },
+            { nombre: 'Iglesia', valor: eventoData.ubicaciones?.iglesia?.nombre },
+            { nombre: 'Dirección iglesia', valor: eventoData.ubicaciones?.iglesia?.direccion },
+            { nombre: 'Salón', valor: eventoData.ubicaciones?.salon?.nombre },
+            { nombre: 'Dirección salón', valor: eventoData.ubicaciones?.salon?.direccion },
+            { nombre: 'Número estimado invitados', valor: eventoData.invitados?.numeroEstimado }
         ];
 
-        campos.forEach(campo => {
-            if (campo !== null && campo !== undefined && campo !== '') {
+        camposEvento.forEach(campo => {
+            if (campo.valor !== null && campo.valor !== undefined && campo.valor !== '' && campo.valor !== 0) {
                 completados++;
+                console.log('✓ Completado:', campo.nombre, '=', campo.valor);
             } else {
                 pendientes++;
+                console.log('⚠ Pendiente:', campo.nombre);
             }
+        });
+    } else {
+        console.warn('eventoData no disponible');
+    }
+
+    // Analizar presupuesto - RUBROS
+    if (presupuestoData?.rubros) {
+        console.log('Analizando', presupuestoData.rubros.length, 'rubros del presupuesto...');
+        presupuestoData.rubros.forEach(rubro => {
+            if (rubro.estado === 'completado' || (rubro.pagado && rubro.pagado > 0)) {
+                completados++;
+                console.log('✓ Rubro pagado:', rubro.concepto, '- $' + rubro.pagado);
+            } else {
+                pendientes++;
+                console.log('⚠ Rubro pendiente:', rubro.concepto);
+            }
+        });
+    } else {
+        console.warn('presupuestoData.rubros no disponible');
+    }
+
+    console.log('📊 RESUMEN:', completados, 'completados,', pendientes, 'pendientes');
+
+    // Crear gráfica
+    new Chart(tasksCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Completados', 'Pendientes'],
+            datasets: [{
+                label: 'Campos de Información',
+                data: [completados, pendientes],
+                backgroundColor: ['#00b894', '#fdcb6e'],
+                borderWidth: 0,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        font: { size: 12 }
+                    },
+                    grid: {
+                        display: true,
+                        color: 'rgba(0,0,0,0.05)'
+                    }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    padding: 12,
+                    callbacks: {
+                        label: function(context) {
+                            const total = completados + pendientes;
+                            const porcentaje = ((context.parsed.y / total) * 100).toFixed(1);
+                            return context.parsed.y + ' campos (' + porcentaje + '%)';
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    console.log('✓ Gráfica de información creada exitosamente');
+}
         });
     }
 
