@@ -79,6 +79,41 @@
 - ✅ Redes sociales
 - ✅ Formularios
 
+
+
+#### Ejemplo 4: Actualizar presupuesto e invitados (para gráficas)
+
+**Para gráfica de presupuesto:**
+```json
+// En data/presupuesto.json:
+{
+  "total": 150000,  ← Presupuesto total
+  "rubros": [
+    {
+      "concepto": "Banquete",
+      "pagado": 30000  ← Cantidad pagada
+    }
+  ]
+}
+```
+
+**Para gráfica de invitados:**
+```json
+// En data/evento.json:
+{
+  "invitados": {
+    "numeroEstimado": 150,      ← Total estimado
+    "numeroConfirmado": 80      ← Ya confirmados
+  }
+}
+```
+
+**Resultado:** Las gráficas en admin.html se actualizan automáticamente:
+- ✅ Gráfica de presupuesto (gastado vs disponible)
+- ✅ Gráfica de invitados (confirmados vs pendientes)
+- ✅ Gráfica de información (campos completados vs pendientes)
+
+---
 ---
 
 ## 📊 Archivos que SE ACTUALIZAN AUTOMÁTICAMENTE
@@ -89,6 +124,13 @@
 - **RSVP:** Carga nombre quinceañera y fecha desde JSON
 - **Social Sharing:** Carga nombre y fecha desde JSON
 - **NO TOCAR** - Ya está configurado para leer del JSON
+
+
+### ✅ `js/dashboard-charts.js`
+- **Gráfica Presupuesto:** Calcula gastado/disponible desde presupuesto.json
+- **Gráfica Invitados:** Carga confirmados/pendientes desde evento.json
+- **Gráfica Información:** Cuenta campos completados dinámicamente
+- **NO TOCAR** - Ya lee automáticamente desde JSON
 
 ### ✅ `index.html`
 - Carga nombre quinceañera, ubicaciones, fechas
