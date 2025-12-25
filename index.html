@@ -173,7 +173,7 @@
         <section>
             <h2 class="section-title"><i class="fas fa-envelope"></i> Confirma tu Asistencia</h2>
             <p style="text-align: center; margin-bottom: 30px; color: var(--cream);">
-                Por favor confirma tu asistencia antes del 5 de abril de 2026
+                Por favor confirma tu asistencia antes del <span id="confirmacionLimite">5 de abril de 2026</span>
             </p>
             <div class="rsvp-form">
                 <form id="rsvpForm" onsubmit="submitRSVP(event)">
@@ -300,6 +300,15 @@
                         }
                     }
                     
+
+                    // Update confirmation deadline
+                    if (eventoData.fechas?.confirmacionLimite) {
+                        const fechaLimite = new Date(eventoData.fechas.confirmacionLimite + 'T12:00:00');
+                        const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                                      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                        const fechaFormateadaLimite = fechaLimite.getDate() + ' de ' + meses[fechaLimite.getMonth()] + ' de ' + fechaLimite.getFullYear();
+                        safeUpdate('confirmacionLimite', fechaFormateadaLimite);
+                    }
                     console.log('✓ Datos del evento cargados correctamente');
                 }
             } catch (error) {

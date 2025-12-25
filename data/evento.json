@@ -16,8 +16,8 @@
     "evento": "2026-04-11",
     "diaEvento": 11,
     "horaMisa": "16:00",
-    "horaRecepcion": null,
-    "confirmacionLimite": null
+    "horaRecepcion": "18:30",
+    "confirmacionLimite": "2026-04-05"
   },
   "ubicaciones": {
     "iglesia": {

@@ -1,44 +1,156 @@
-// Countdown Timer
+// Countdown Timer - Carga la fecha desde evento.json
+let eventoDataForCountdown = null;
+
+async function loadEventDataForCountdown() {
+    try {
+        const response = await fetch('data/evento.json');
+        eventoDataForCountdown = await response.json();
+    } catch (error) {
+        console.error('Error cargando fecha del evento:', error);
+    }
+}
+
 function updateCountdown() {
-    // Fecha del evento: 11 de abril de 2026 a las 16:00 hrs
-    const eventDate = new Date(2026, 3, 11, 16, 0, 0).getTime(); // Mes 3 = Abril (0-indexed)
+    if (!eventoDataForCountdown || !eventoDataForCountdown.fechas) {
+        // Si no hay datos aún, usar fecha por defecto temporalmente
+        const eventDate = new Date(2026, 3, 11, 16, 0, 0).getTime();
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+        }
+        return;
+    }
+
+    // Construir fecha desde JSON
+    const fechaEvento = eventoDataForCountdown.fechas.evento; // "2026-04-11"
+    const horaEvento = eventoDataForCountdown.fechas.horaMisa || "16:00"; // "16:00"
+
+    const [year, month, day] = fechaEvento.split('-').map(Number);
+    const [hours, minutes] = horaEvento.split(':').map(Number);
+
+    const eventDate = new Date(year, month - 1, day, hours, minutes, 0).getTime();
     const now = new Date().getTime();
     const distance = eventDate - now;
 
     if (distance < 0) {
-        document.getElementById('countdown').innerHTML = '<p style="text-align: center; font-size: 1.5rem; color: var(--gold);">¡El evento ya comenzó! 🎉</p>';
+        const countdownEl = document.getElementById('countdown');
+        if (countdownEl) {
+            countdownEl.innerHTML = '<p style="text-align: center; font-size: 1.5rem; color: var(--gold);">¡El evento ya comenzó! 🎉</p>';
+        }
         return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const daysLeft = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hoursLeft = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutesLeft = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const secondsLeft = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    if (daysEl) daysEl.textContent = String(daysLeft).padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = String(hoursLeft).padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = String(minutesLeft).padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = String(secondsLeft).padStart(2, '0');
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+// Cargar datos y luego iniciar countdown
+loadEventDataForCountdown().then(() => {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+});
 
-// Add to Calendar
+// Helper function para formatear fecha desde JSON
+function formatDateFromJSON(dateStr) {
+    const [year, month, day] = dateStr.split('-');
+    const fecha = new Date(year, month - 1, day);
+    const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
+    return fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);
+}
+
+// Helper function para formatear fecha corta
+function formatShortDateFromJSON(dateStr) {
+    const [year, month, day] = dateStr.split('-');
+    const fecha = new Date(year, month - 1, day);
+    const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    return fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' de ' + fecha.getFullYear();
+}
+
+// Helper para formato de calendario (YYYYMMDDTHHMMSS)
+function getCalendarDate(dateStr, timeStr) {
+    const [year, month, day] = dateStr.split('-');
+    const [hours, minutes] = timeStr.split(':');
+    return year + month + day + 'T' + hours + minutes + '00';
+}
+
+// Add to Calendar - Carga desde JSON
 function addToCalendar(type) {
-    const title = type === 'ceremony' ? 'XV Años Barbara Brittany - Ceremonia' : 'XV Años Barbara Brittany - Recepción';
-    const location = type === 'ceremony'
-        ? 'La Joya, León, Guanajuato'
-        : 'La Joya, León, Guanajuato';
-    const startTime = type === 'ceremony' ? '20260411T160000' : '20260411T183000';
-    const endTime = type === 'ceremony' ? '20260411T170000' : '20260412T020000';
+    if (!eventoDataForCountdown) {
+        alert('Cargando datos del evento...');
+        return;
+    }
 
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent('XV Años de Barbara Brittany')}&location=${encodeURIComponent(location)}`;
+    const nombre = eventoDataForCountdown.quinceañera?.nombre || 'Barbara Brittany';
+    const fechaEvento = eventoDataForCountdown.fechas?.evento || '2026-04-11';
+    const horaMisa = eventoDataForCountdown.fechas?.horaMisa || '16:00';
+    const horaRecepcion = eventoDataForCountdown.fechas?.horaRecepcion || '18:30';
+    const iglesiaLugar = eventoDataForCountdown.ubicaciones?.iglesia?.nombre || 'La Joya, León, Guanajuato';
+    const salonLugar = eventoDataForCountdown.ubicaciones?.salon?.nombre || 'La Joya, León, Guanajuato';
+
+    const title = type === 'ceremony'
+        ? 'XV Años ' + nombre + ' - Ceremonia'
+        : 'XV Años ' + nombre + ' - Recepción';
+
+    const location = type === 'ceremony' ? iglesiaLugar : salonLugar;
+
+    const startTime = type === 'ceremony'
+        ? getCalendarDate(fechaEvento, horaMisa)
+        : getCalendarDate(fechaEvento, horaRecepcion);
+
+    // Calcular endTime (1 hora después para ceremonia, hasta las 2am para recepción)
+    const endTime = type === 'ceremony'
+        ? getCalendarDate(fechaEvento, String(parseInt(horaMisa.split(':')[0]) + 1).padStart(2, '0') + ':00')
+        : getNextDayDate(fechaEvento) + 'T020000';
+
+    const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' +
+        encodeURIComponent(title) +
+        '&dates=' + startTime + '/' + endTime +
+        '&details=' + encodeURIComponent('XV Años de ' + nombre) +
+        '&location=' + encodeURIComponent(location);
 
     window.open(googleCalendarUrl, '_blank');
 }
 
-// RSVP Form Submission
+// Helper para obtener fecha del día siguiente
+function getNextDayDate(dateStr) {
+    const [year, month, day] = dateStr.split('-');
+    const fecha = new Date(year, month - 1, day);
+    fecha.setDate(fecha.getDate() + 1);
+    return fecha.getFullYear() +
+           String(fecha.getMonth() + 1).padStart(2, '0') +
+           String(fecha.getDate()).padStart(2, '0');
+}
+
+// RSVP Form Submission - Carga desde JSON
 function submitRSVP(event) {
     event.preventDefault();
 
@@ -49,8 +161,13 @@ function submitRSVP(event) {
     const attendance = formData.get('attendance');
     const message = formData.get('message') || 'Sin mensaje';
 
+    const nombre = eventoDataForCountdown?.quinceañera?.nombre || 'Barbara Brittany';
+    const fechaEvento = eventoDataForCountdown?.fechas?.evento || '2026-04-11';
+    const fechaFormateada = formatShortDateFromJSON(fechaEvento);
+    const whatsappNumber = eventoDataForCountdown?.contacto?.whatsappFormat || '524779203776';
+
     const whatsappMessage = `
-✨ CONFIRMACIÓN XV AÑOS - BARBARA BRITTANY ✨
+✨ CONFIRMACIÓN XV AÑOS - ${nombre.toUpperCase()} ✨
 
 👤 Nombre: ${name}
 📱 Teléfono: ${phone}
@@ -58,24 +175,29 @@ function submitRSVP(event) {
 ✅ Asistencia: ${attendance === 'si' ? 'Sí asistiré' : 'No podré asistir'}
 💬 Mensaje: ${message}
 
-📅 Fecha: 11 de abril de 2026
+📅 Fecha: ${fechaFormateada}
     `.trim();
 
-    // Actualizar con el número correcto de WhatsApp
-    const whatsappUrl = `https://wa.me/524779203776?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(whatsappUrl, '_blank');
 
-    document.getElementById('successMessage').style.display = 'block';
-    event.target.reset();
+    const successMsg = document.getElementById('successMessage');
+    if (successMsg) {
+        successMsg.style.display = 'block';
+        setTimeout(() => {
+            successMsg.style.display = 'none';
+        }, 5000);
+    }
 
-    setTimeout(() => {
-        document.getElementById('successMessage').style.display = 'none';
-    }, 5000);
+    event.target.reset();
 }
 
-// Social Sharing
+// Social Sharing - Carga desde JSON
 function shareWhatsApp() {
-    const text = '¡Estás invitado a mis XV años! 👑✨ - Barbara Brittany - 11 de abril de 2026';
+    const nombre = eventoDataForCountdown?.quinceañera?.nombre || 'Barbara Brittany';
+    const fechaEvento = eventoDataForCountdown?.fechas?.evento || '2026-04-11';
+    const fechaFormateada = formatShortDateFromJSON(fechaEvento);
+    const text = `¡Estás invitado a mis XV años! 👑✨ - ${nombre} - ${fechaFormateada}`;
     const url = window.location.href;
     window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
 }
@@ -86,7 +208,10 @@ function shareFacebook() {
 }
 
 function shareTwitter() {
-    const text = '¡Estás invitado a mis XV años! 👑✨ - Barbara Brittany - 11 de abril de 2026';
+    const nombre = eventoDataForCountdown?.quinceañera?.nombre || 'Barbara Brittany';
+    const fechaEvento = eventoDataForCountdown?.fechas?.evento || '2026-04-11';
+    const fechaFormateada = formatShortDateFromJSON(fechaEvento);
+    const text = `¡Estás invitado a mis XV años! 👑✨ - ${nombre} - ${fechaFormateada}`;
     const url = window.location.href;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
 }
