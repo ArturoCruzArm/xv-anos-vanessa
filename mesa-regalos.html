@@ -190,10 +190,44 @@
 
         <!-- Footer -->
         <footer style="text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 2px solid rgba(212, 175, 55, 0.3);">
-            <p style="color: var(--gold);">Barbara Brittany XV Años - 11 de Abril 2026</p>
+            <p style="color: var(--gold);"><span id="quinceaneraName">Barbara Brittany</span> XV Años - <span id="eventDateShort">11 de Abril 2026</span></p>
         </footer>
     </div>
 
     <script src="js/mesa-regalos.js"></script>
+
+    <script src="js/data-loader.js"></script>
+    <script>
+        // Cargar datos del evento
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const eventoData = await dataLoader.loadJSON('data/evento.json');
+
+                if (eventoData) {
+                    const nameEl = document.getElementById('quinceaneraName');
+                    if (nameEl && eventoData.quinceañera?.nombre) {
+                        nameEl.textContent = eventoData.quinceañera.nombre;
+                    }
+
+                    if (eventoData.fechas?.evento) {
+                        const fecha = new Date(eventoData.fechas.evento + 'T12:00:00');
+                        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                                      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                        const fechaCorta = fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
+
+                        const dateEl = document.getElementById('eventDateShort');
+                        if (dateEl) {
+                            dateEl.textContent = fechaCorta;
+                        }
+                    }
+
+                    console.log('✓ Datos cargados en mesa-regalos.html');
+                }
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+            }
+        });
+    </script>
+
 </body>
 </html>

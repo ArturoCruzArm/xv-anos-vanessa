@@ -16,7 +16,7 @@
         <header class="admin-header">
             <div class="admin-header-content">
                 <h1><i class="fas fa-tasks"></i> Panel de Organización</h1>
-                <p>XV Años de Barbara Brittany - 11 de Abril 2026</p>
+                <p>XV Años de <span id="quinceaneraName">Barbara Brittany</span> - <span id="eventDateShort">11 de Abril 2026</span></p>
             </div>
             <div class="admin-header-actions">
                 <a href="index.html" class="btn-view-invitation" target="_blank">
@@ -251,5 +251,41 @@
     <script src="js/data-manager.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/dashboard-charts.js"></script>
+
+    <script src="js/data-loader.js"></script>
+    <script>
+        // Cargar datos del evento
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const eventoData = await dataLoader.loadJSON('data/evento.json');
+
+                if (eventoData) {
+                    // Actualizar nombre
+                    const nameEl = document.getElementById('quinceaneraName');
+                    if (nameEl && eventoData.quinceañera?.nombre) {
+                        nameEl.textContent = eventoData.quinceañera.nombre;
+                    }
+
+                    // Actualizar fecha
+                    if (eventoData.fechas?.evento) {
+                        const fecha = new Date(eventoData.fechas.evento + 'T12:00:00');
+                        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                                      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                        const fechaCorta = fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
+
+                        const dateEl = document.getElementById('eventDateShort');
+                        if (dateEl) {
+                            dateEl.textContent = fechaCorta;
+                        }
+                    }
+
+                    console.log('✓ Datos cargados en admin.html');
+                }
+            } catch (error) {
+                console.error('Error cargando datos en admin.html:', error);
+            }
+        });
+    </script>
+
 </body>
 </html>
