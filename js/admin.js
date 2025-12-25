@@ -1,6 +1,6 @@
 // Calculate days remaining
 function updateDaysRemaining() {
-    const eventDate = new Date(2025, 3, 12).getTime(); // 12 de abril de 2025
+    const eventDate = new Date(2026, 3, 12).getTime(); // 12 de abril de 2026
     const today = new Date().getTime();
     const difference = eventDate - today;
     const days = Math.ceil(difference / (1000 * 60 * 60 * 24));

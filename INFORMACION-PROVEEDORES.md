@@ -90,7 +90,7 @@
 - [x] Nombre de la mamá: **Patricia** ✅
 - [ ] Nombre del papá
 - [x] Hora de la misa: **4:00 PM** ✅
-- [ ] Fecha exacta del evento (abril 2025 - ¿qué día?)
+- [ ] Fecha exacta del evento (abril 2026 - ¿qué día?)
 - [ ] Hora de la recepción
 - [ ] Número de WhatsApp para confirmaciones
 

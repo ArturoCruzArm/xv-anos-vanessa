@@ -17,7 +17,7 @@ const DATA_MANAGER = {
     exportAll: function() {
         const data = {
             timestamp: new Date().toISOString(),
-            event: 'XV Años Vanessa - 12 Abril 2025',
+            event: 'XV Años Vanessa - 12 Abril 2026',
             data: {}
         };
 

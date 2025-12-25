@@ -103,7 +103,7 @@ Edita las variables CSS en `css/styles.css`:
 #### Fecha del Evento
 Cambia la fecha en `js/main.js`:
 ```javascript
-const eventDate = new Date(2025, 3, 12, 17, 0, 0); // Mes 3 = Abril
+const eventDate = new Date(2026, 3, 12, 17, 0, 0); // Mes 3 = Abril
 ```
 
 #### Información de Contacto
@@ -212,7 +212,7 @@ Cada servicio tiene su propia página con:
 ## 📊 Información del Evento
 
 - **Quinceañera:** Barbara Brittany
-- **Fecha:** 12 de Abril de 2025
+- **Fecha:** 12 de Abril de 2026
 - **Hora Ceremonia:** 17:00 hrs
 - **Hora Recepción:** 18:30 hrs
 - **Ubicación:** La Joya, León, Guanajuato
@@ -223,7 +223,7 @@ Cada servicio tiene su propia página con:
 - **Fotografía y Video:** Foro 7
 - **Contacto:** 477-920-3776
 
-## ✨ NUEVAS FUNCIONALIDADES TOP 2025
+## ✨ NUEVAS FUNCIONALIDADES TOP 2026
 
 ### 1. Gestión de Invitados (invitados.html)
 - Base de datos completa con todos los invitados

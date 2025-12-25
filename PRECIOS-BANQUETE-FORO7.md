@@ -235,7 +235,7 @@
 - [ ] Menús disponibles (opciones específicas)
 - [ ] Posibilidad de degustación
 - [ ] Costo exacto del flete si el evento es fuera de León
-- [ ] Disponibilidad para abril 2025
+- [ ] Disponibilidad para abril 2026
 - [ ] Anticipo requerido
 - [ ] Forma de pago
 
