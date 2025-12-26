@@ -72,6 +72,31 @@ function updateTasksCount() {
     }
 }
 
+// Load guest statistics from JSON and localStorage
+async function loadGuestStats() {
+    try {
+        const eventoResponse = await fetch('data/evento.json');
+        const eventoData = await eventoResponse.json();
+
+        // Load estimated count from JSON
+        const estimado = eventoData.invitados?.numeroEstimado || 300;
+        const estimadoEl = document.getElementById('totalInvitadosEstimado');
+        if (estimadoEl) {
+            estimadoEl.textContent = estimado;
+        }
+
+        // Load actual confirmations from localStorage
+        const guests = JSON.parse(localStorage.getItem('xv-barbara-brittany-guests') || '[]');
+        const confirmados = guests.filter(g => g.status === 'confirmado').length;
+        const confirmadosEl = document.getElementById('confirmadosCount');
+        if (confirmadosEl) {
+            confirmadosEl.textContent = confirmados;
+        }
+    } catch (error) {
+        console.error('Error loading guest stats:', error);
+    }
+}
+
 // Load service contacts from JSON
 async function loadServiceContacts() {
     try {
@@ -135,6 +160,7 @@ async function loadServiceContacts() {
 document.addEventListener('DOMContentLoaded', () => {
     updateDaysRemaining();
     loadTasks();
+    loadGuestStats();
     loadServiceContacts();
 
     const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
