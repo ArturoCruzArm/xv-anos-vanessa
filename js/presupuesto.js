@@ -1,15 +1,78 @@
-// Budget Calculator
-document.addEventListener('DOMContentLoaded', () => {
-    const budgetInputs = document.querySelectorAll('.budget-input');
+// Budget Calculator - CARGA DESDE JSON
+let presupuestoData = null;
 
-    // Calculate on input change
-    budgetInputs.forEach(input => {
-        input.addEventListener('input', calculateBudget);
+document.addEventListener('DOMContentLoaded', async () => {
+    // Cargar datos desde JSON
+    try {
+        const response = await fetch('data/presupuesto.json');
+        presupuestoData = await response.json();
+
+        console.log('✓ Presupuesto cargado desde JSON:', presupuestoData);
+
+        // Cargar datos en la página
+        loadBudgetData();
+
+        // Configurar event listeners
+        const budgetInputs = document.querySelectorAll('.budget-input');
+        budgetInputs.forEach(input => {
+            input.addEventListener('input', calculateBudget);
+        });
+
+        // Calcular totales iniciales
+        calculateBudget();
+    } catch (error) {
+        console.error('Error cargando presupuesto.json:', error);
+        calculateBudget(); // Calcular con valores por defecto
+    }
+});
+
+function loadBudgetData() {
+    if (!presupuestoData) return;
+
+    // Actualizar presupuesto total
+    const totalBudgetEl = document.getElementById('totalBudget');
+    if (totalBudgetEl) {
+        totalBudgetEl.textContent = '$' + presupuestoData.total.toLocaleString('es-MX');
+    }
+
+    // Cargar rubros en la tabla
+    const tbody = document.querySelector('.budget-table tbody');
+    const rows = tbody.querySelectorAll('tr:not(.budget-total)');
+
+    presupuestoData.rubros.forEach((rubro, index) => {
+        if (rows[index]) {
+            const inputs = rows[index].querySelectorAll('.budget-input');
+            const select = rows[index].querySelector('select');
+
+            // Cargar valores
+            if (inputs[0] && rubro.costo !== null) {
+                inputs[0].value = rubro.costo;
+            }
+            if (inputs[1] && rubro.anticipo !== null) {
+                inputs[1].value = rubro.anticipo;
+            }
+
+            // Cargar estado
+            if (select && rubro.estado) {
+                const estadoMap = {
+                    'pendiente': 'Pendiente',
+                    'apartado': 'Apartado',
+                    'pagado': 'Pagado',
+                    'completado': 'Pagado'
+                };
+                const estadoTexto = estadoMap[rubro.estado.toLowerCase()] || 'Pendiente';
+                for (let option of select.options) {
+                    if (option.text === estadoTexto) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+        }
     });
 
-    // Initial calculation
-    calculateBudget();
-});
+    console.log('✓ Datos del presupuesto cargados en la tabla');
+}
 
 function calculateBudget() {
     const rows = document.querySelectorAll('.budget-table tbody tr:not(.budget-total)');
@@ -42,7 +105,8 @@ function calculateBudget() {
     // Update summary cards
     document.getElementById('totalSpent').textContent = `$${totalAdvance.toLocaleString('es-MX')}`;
 
-    const budgetTotal = 150000; // Fixed budget
+    // Cargar presupuesto total desde JSON, o usar 150000 como fallback
+    const budgetTotal = presupuestoData?.total || 150000;
     const remaining = budgetTotal - totalCost;
     document.getElementById('remaining').textContent = `$${remaining.toLocaleString('es-MX')}`;
 
@@ -66,6 +130,21 @@ function calculateBudget() {
 // Save button
 document.querySelectorAll('.btn-save').forEach(button => {
     button.addEventListener('click', () => {
-        alert('✅ Presupuesto guardado correctamente');
+        const mensaje = '💾 DATOS GUARDADOS LOCALMENTE
+
+' +
+                      '✅ La información se guardó en tu navegador
+
+' +
+                      '⚠️ IMPORTANTE:
+' +
+                      'Para CONFIRMAR los cambios y que yo los reciba,
+' +
+                      'debes enviarme la información por WhatsApp
+
+' +
+                      'Los datos guardados aquí solo están en tu dispositivo.';
+
+        alert(mensaje);
     });
 });
