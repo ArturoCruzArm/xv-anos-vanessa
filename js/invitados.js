@@ -50,11 +50,25 @@ function renderGuestsTable(filteredGuests = null) {
     const guestsToRender = filteredGuests || guests;
 
     if (guestsToRender.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">No hay invitados registrados</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px;">No hay invitados registrados</td></tr>';
         return;
     }
 
-    tbody.innerHTML = guestsToRender.map((guest, index) => `
+    tbody.innerHTML = guestsToRender.map((guest, index) => {
+        // Determinar estado de invitación
+        let invitationStatus = '';
+        if (guest.invitacionEnviada) {
+            const fecha = new Date(guest.fechaEnvio).toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit' });
+            invitationStatus = `<span style="color: #00b894; font-size: 0.85rem;"><i class="fas fa-check-circle"></i> ${fecha}</span>`;
+        } else if (!guest.phone) {
+            invitationStatus = `<span style="color: #636e72; font-size: 0.85rem;"><i class="fas fa-exclamation-triangle"></i> Sin tel.</span>`;
+        } else {
+            invitationStatus = `<button class="btn-icon" onclick="sendInvitation(${guest.id})" title="Enviar invitación QR" style="background: #00b894; color: white;">
+                <i class="fab fa-whatsapp"></i>
+            </button>`;
+        }
+
+        return `
         <tr data-status="${guest.status}" data-category="${guest.category}">
             <td><strong>${guest.name}</strong></td>
             <td><span class="badge badge-${getCategoryColor(guest.category)}">${getCategoryLabel(guest.category)}</span></td>
@@ -63,6 +77,7 @@ function renderGuestsTable(filteredGuests = null) {
             <td>${guest.table || '-'}</td>
             <td><span class="status-badge ${getStatusClass(guest.status)}">${getStatusLabel(guest.status)}</span></td>
             <td>${guest.phone || '-'}</td>
+            <td style="text-align: center;">${invitationStatus}</td>
             <td class="actions">
                 <button class="btn-icon" onclick="editGuest(${guest.id})" title="Editar">
                     <i class="fas fa-edit"></i>
@@ -72,7 +87,8 @@ function renderGuestsTable(filteredGuests = null) {
                 </button>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Filter guests
@@ -236,6 +252,61 @@ function getStatusLabel(status) {
         'no-asistira': 'No Asistirá'
     };
     return labels[status] || status;
+}
+
+// Send invitation via WhatsApp with QR code
+function sendInvitation(guestId) {
+    const guest = guests.find(g => g.id === guestId);
+    if (!guest) return;
+
+    if (!guest.phone) {
+        alert('⚠️ Este invitado no tiene teléfono registrado.\n\nAgrega un número de teléfono para poder enviar la invitación.');
+        return;
+    }
+
+    // Generar URL personalizada para el QR
+    const baseURL = 'https://barbara-brittany.invitados.org';
+    const qrURL = `${baseURL}?invitado=${encodeURIComponent(guest.name)}&pases=${guest.pases}`;
+
+    // Crear mensaje personalizado
+    const message = `🎉 ¡Hola ${guest.name}!
+
+Estás cordialmente invitado(a) a celebrar los XV años de Barbara Brittany
+
+📅 Fecha: 11 de abril de 2026
+⏰ Ceremonia Religiosa: 4:00 PM
+📍 Parroquia San Juan Bautista de la Salle
+
+🎊 Recepción: 6:30 PM
+📍 Quinta Palomares
+
+👥 Pases asignados: ${guest.pases}
+
+👇 Haz clic en el siguiente enlace para ver tu invitación personalizada y confirmar tu asistencia:
+
+${qrURL}
+
+¡Te esperamos! 💖✨`;
+
+    // Abrir WhatsApp
+    const whatsappNumber = guest.phone.replace(/\D/g, ''); // Remover caracteres no numéricos
+    const whatsappURL = `https://wa.me/52${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+
+    // Marcar como enviado
+    const guestIndex = guests.findIndex(g => g.id === guestId);
+    if (guestIndex >= 0) {
+        guests[guestIndex].invitacionEnviada = true;
+        guests[guestIndex].fechaEnvio = new Date().toISOString();
+        saveGuests();
+
+        // Mostrar confirmación
+        setTimeout(() => {
+            if (confirm('✅ Invitación enviada\n\n¿La invitación se envió correctamente por WhatsApp?')) {
+                console.log(`Invitación confirmada para ${guest.name}`);
+            }
+        }, 1000);
+    }
 }
 
 // Export functions

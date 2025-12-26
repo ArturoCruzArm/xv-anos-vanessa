@@ -35,6 +35,15 @@
         <section class="service-section">
             <h2><i class="fas fa-qrcode"></i> Generar Código QR</h2>
             <div class="form-card">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label><i class="fas fa-users"></i> Seleccionar Invitado (Opcional)</label>
+                    <select id="selectGuest" onchange="loadGuestData()" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem;">
+                        <option value="">Seleccionar de la lista...</option>
+                    </select>
+                    <small style="color: #636e72; display: block; margin-top: 8px;">
+                        <i class="fas fa-info-circle"></i> O escribe manualmente el nombre y pases abajo
+                    </small>
+                </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Nombre del Invitado</label>
@@ -152,7 +161,51 @@
             document.getElementById('guestNameQR').value = '';
             document.getElementById('qrcode').innerHTML = '';
             document.getElementById('qrResults').style.display = 'none';
+            document.getElementById('selectGuest').value = '';
         }
+
+        // Cargar lista de invitados desde localStorage
+        function loadGuestsList() {
+            const guests = JSON.parse(localStorage.getItem('xv-barbara-brittany-guests') || '[]');
+            const select = document.getElementById('selectGuest');
+
+            if (guests.length === 0) {
+                select.innerHTML = '<option value="">No hay invitados registrados</option>';
+                return;
+            }
+
+            // Ordenar por nombre
+            guests.sort((a, b) => a.name.localeCompare(b.name));
+
+            // Limpiar y agregar opciones
+            select.innerHTML = '<option value="">Seleccionar de la lista...</option>';
+            guests.forEach(guest => {
+                const option = document.createElement('option');
+                option.value = guest.id;
+                option.textContent = `${guest.name} (${guest.pases} pases)`;
+                option.dataset.name = guest.name;
+                option.dataset.pases = guest.pases;
+                select.appendChild(option);
+            });
+        }
+
+        // Cargar datos del invitado seleccionado
+        function loadGuestData() {
+            const select = document.getElementById('selectGuest');
+            const selectedOption = select.options[select.selectedIndex];
+
+            if (!selectedOption.value) {
+                document.getElementById('guestNameQR').value = '';
+                document.getElementById('guestPases').value = '2';
+                return;
+            }
+
+            document.getElementById('guestNameQR').value = selectedOption.dataset.name;
+            document.getElementById('guestPases').value = selectedOption.dataset.pases;
+        }
+
+        // Cargar lista al iniciar la página
+        document.addEventListener('DOMContentLoaded', loadGuestsList);
     </script>
 </body>
 </html>
