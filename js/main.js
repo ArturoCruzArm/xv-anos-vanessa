@@ -1,3 +1,61 @@
+// Sistema de Invitación Personalizada con QR
+// Leer parámetros de URL al cargar la página
+function initPersonalizedInvitation() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('invitado');
+    const guestPases = urlParams.get('pases');
+
+    if (guestName && guestPases) {
+        // Mostrar sección de bienvenida personalizada
+        const welcomeSection = document.getElementById('personalizedWelcome');
+        const welcomeText = document.getElementById('guestWelcomeText');
+        const passesText = document.getElementById('guestPassesText');
+
+        if (welcomeSection && welcomeText && passesText) {
+            welcomeText.textContent = `${guestName}, estás cordialmente invitado(a) a celebrar mis XV años`;
+            passesText.innerHTML = `<i class="fas fa-ticket-alt"></i> ${guestPases} ${guestPases == 1 ? 'pase asignado' : 'pases asignados'}`;
+            welcomeSection.style.display = 'block';
+        }
+
+        // Auto-completar formulario RSVP
+        const nameInput = document.getElementById('name');
+        const guestsInput = document.getElementById('guests');
+
+        if (nameInput) nameInput.value = guestName;
+        if (guestsInput) guestsInput.value = guestPases;
+
+        // Guardar datos del QR en localStorage para tracking
+        saveQRConfirmation(guestName, guestPases, 'visited');
+    }
+}
+
+// Guardar confirmaciones en localStorage
+function saveQRConfirmation(guestName, pases, status = 'visited') {
+    const confirmations = JSON.parse(localStorage.getItem('xv-barbara-brittany-confirmations') || '[]');
+
+    // Verificar si ya existe
+    const existingIndex = confirmations.findIndex(c => c.name === guestName);
+
+    const confirmation = {
+        name: guestName,
+        pases: pases,
+        status: status,
+        timestamp: new Date().toISOString(),
+        url: window.location.href
+    };
+
+    if (existingIndex >= 0) {
+        confirmations[existingIndex] = confirmation;
+    } else {
+        confirmations.push(confirmation);
+    }
+
+    localStorage.setItem('xv-barbara-brittany-confirmations', JSON.stringify(confirmations));
+}
+
+// Inicializar invitación personalizada al cargar la página
+document.addEventListener('DOMContentLoaded', initPersonalizedInvitation);
+
 // Countdown Timer - Carga la fecha desde evento.json
 let eventoDataForCountdown = null;
 
@@ -160,6 +218,9 @@ function submitRSVP(event) {
     const guests = formData.get('guests');
     const attendance = formData.get('attendance');
     const message = formData.get('message') || 'Sin mensaje';
+
+    // Guardar confirmación en localStorage
+    saveQRConfirmation(name, guests, attendance === 'si' ? 'confirmed' : 'declined');
 
     const nombre = eventoDataForCountdown?.quinceañera?.nombre || 'Barbara Brittany';
     const fechaEvento = eventoDataForCountdown?.fechas?.evento || '2026-04-11';
