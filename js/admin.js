@@ -1,7 +1,20 @@
 // Calculate days remaining
 function updateDaysRemaining() {
-    // Cargar fecha desde JSON
-    let eventDate = new Date(2026, 3, 11).getTime(); // Fecha por defecto
+    // Función helper para actualizar el DOM
+    function updateDisplay(eventDate) {
+        const today = new Date().getTime();
+        const difference = eventDate - today;
+        const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        const daysElement = document.getElementById('daysRemaining');
+        if (daysElement) {
+            daysElement.textContent = days > 0 ? days : '¡Hoy!';
+        }
+    }
+
+    // Fecha por defecto
+    const defaultDate = new Date(2026, 3, 11).getTime(); // 11 de abril de 2026
+    updateDisplay(defaultDate);
 
     // Actualizar con fecha real desde JSON
     fetch('data/evento.json')
@@ -9,21 +22,11 @@ function updateDaysRemaining() {
         .then(data => {
             if (data.fechas?.evento) {
                 const [year, month, day] = data.fechas.evento.split('-').map(Number);
-                eventDate = new Date(year, month - 1, day).getTime();
-                updateCountdown(); // Actualizar con nueva fecha
+                const eventDate = new Date(year, month - 1, day).getTime();
+                updateDisplay(eventDate); // Actualizar con fecha del JSON
             }
         })
         .catch(error => console.error('Error cargando fecha:', error));
-
-    const eventDateOriginal = new Date(2026, 3, 11).getTime(); // 11 de abril de 2026 (backup)
-    const today = new Date().getTime();
-    const difference = eventDate - today;
-    const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
-
-    const daysElement = document.getElementById('daysRemaining');
-    if (daysElement) {
-        daysElement.textContent = days > 0 ? days : '¡Hoy!';
-    }
 }
 
 // Save tasks to localStorage

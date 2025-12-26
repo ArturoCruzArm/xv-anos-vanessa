@@ -288,10 +288,8 @@ function createTasksProgress() {
 
     console.log('✓ Gráfica de información creada exitosamente');
 }
-        });
-    }
 
-    // Analizar presupuesto
+// Analizar presupuesto
     if (presupuestoData?.rubros) {
         presupuestoData.rubros.forEach(rubro => {
             if (rubro.estado === 'completado' || rubro.pagado > 0) {
