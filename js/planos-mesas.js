@@ -33,7 +33,7 @@ function loadTablesFromLocalStorage() {
 }
 
 // Guardar mesas en localStorage
-function saveTablesTo LocalStorage() {
+function saveTablesToLocalStorage() {
     localStorage.setItem('xv-vanessa-tables', JSON.stringify(tables));
 }
 
@@ -75,7 +75,7 @@ function createTablesFromGuests() {
         assignments[tableNum] = mesasAgrupadas[tableNum];
     });
 
-    saveTablesTo LocalStorage();
+    saveTablesToLocalStorage();
     updateTableSelect();
     console.log('Mesas creadas desde invitados:', tables.length);
 }
@@ -93,7 +93,7 @@ function addTable() {
         y: Math.random() * 70 + 10 
     };
     tables.push(table);
-    saveTablesTo LocalStorage();
+    saveTablesToLocalStorage();
     renderFloorPlan();
     updateTableSelect();
 }
@@ -178,7 +178,7 @@ document.getElementById('floorPlan').addEventListener('drop', function(e) {
         const rect = this.getBoundingClientRect();
         table.x = ((e.clientX - rect.left) / rect.width) * 100;
         table.y = ((e.clientY - rect.top) / rect.height) * 100;
-        saveTablesTo LocalStorage();
+        saveTablesToLocalStorage();
         renderFloorPlan();
     }
 });
