@@ -3,33 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Música & DJ - XV Años Barbara Brittany</title>
+    <title>Gestión de Música & DJ - XV Años</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/servicios.css">
     <style>
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+        .music-provider-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #6c5ce7;
+        }
+        .music-provider-card.banda {
+            border-left-color: #f39c12;
+        }
+        .provider-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .provider-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin: 30px auto;
-            max-width: 500px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s;
+            font-size: 1.5rem;
+            color: white;
         }
-        .btn-whatsapp:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        .provider-icon.dj { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+        .provider-icon.banda { background: linear-gradient(135deg, #ffeaa7, #f39c12); }
+        .provider-info h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .provider-info p {
+            margin: 5px 0 0 0;
+            color: #7f8c8d;
+        }
+        .provider-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .detail-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .detail-item label {
+            display: block;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        .detail-item span {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d4edda; color: #155724; }
+        .special-feature {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .favorite-styles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .style-tag {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .song-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .song-input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+        }
+        .song-input-group button {
+            padding: 12px 20px;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .song-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .song-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .song-list li i {
+            color: #6c5ce7;
+        }
+        .song-list li .remove-song {
+            margin-left: auto;
+            color: #e74c3c;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .moment-songs {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .moment-songs h4 {
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .moment-songs input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -39,98 +173,478 @@
 
         <header class="service-header" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">
             <div class="service-icon"><i class="fas fa-music"></i></div>
-            <h1>Música & DJ</h1>
-            <p>Ambiente musical perfecto para la celebración</p>
+            <h1>Música del Evento</h1>
+            <p>DJ, Banda y ambiente musical - <span id="quinceName">Cargando...</span></p>
         </header>
 
+        <!-- Estilo Favorito de la Quinceañera -->
         <section class="service-section">
-            <h2><i class="fas fa-microphone"></i> Información del DJ/Grupo Musical</h2>
-            <div class="form-card" id="formMusica">
-                <div class="form-group">
-                    <label>Nombre del DJ/Grupo</label>
-                    <input type="text" value="Producciones Foro 7" readonly class="readonly-field">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Teléfono</label>
-                        <input type="tel" value="477-920-3776" readonly class="readonly-field">
-                    </div>
-                    <div class="form-group">
-                        <label>Costo</label>
-                        <input type="number" placeholder="$8,000">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Horario Contratado</label>
-                    <input type="text" placeholder="19:00 - 02:00 hrs">
-                </div>
-                <button class="btn-save"><i class="fas fa-save"></i> Guardar Información</button>
-            </div>
-        </section>
-
-        <section class="service-section">
-            <h2><i class="fas fa-check-circle"></i> Equipo Incluido</h2>
+            <h2><i class="fas fa-heart"></i> Estilo Musical Favorito</h2>
             <div class="form-card">
-                <div class="checkbox-group">
-                    <label><input type="checkbox"><span>Equipo de sonido profesional</span></label>
-                    <label><input type="checkbox"><span>Iluminación LED</span></label>
-                    <label><input type="checkbox"><span>Luces robóticas</span></label>
-                    <label><input type="checkbox"><span>Máquina de humo</span></label>
-                    <label><input type="checkbox"><span>Pantalla para proyección</span></label>
-                    <label><input type="checkbox"><span>Micrófono inalámbrico</span></label>
+                <p style="color: #7f8c8d; margin-bottom: 15px;">Los estilos favoritos de la quinceañera para considerar en la música:</p>
+                <div class="favorite-styles" id="favoriteStyles">
+                    <!-- Se carga dinámicamente -->
+                </div>
+                <div class="song-input-group">
+                    <input type="text" id="newStyle" placeholder="Agregar otro estilo musical...">
+                    <button onclick="addStyle()"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
         </section>
 
+        <!-- DJ / Sonido -->
         <section class="service-section">
-            <h2><i class="fas fa-list-music"></i> Playlist y Géneros</h2>
-            <div class="menu-grid">
-                <div class="menu-card">
-                    <h3><i class="fas fa-heart"></i> Vals</h3>
-                    <textarea placeholder="Canción para el vals con el padre:&#10;&#10;Canción para el vals sorpresa:&#10;&#10;Canción para chambelanes:"></textarea>
+            <h2><i class="fas fa-headphones"></i> DJ / Sonido</h2>
+            <div class="music-provider-card">
+                <div class="provider-header">
+                    <div class="provider-icon dj"><i class="fas fa-headphones-alt"></i></div>
+                    <div class="provider-info">
+                        <h3>DJ / Sonido Profesional</h3>
+                        <p id="djStatus">Estado: Por elegir proveedor</p>
+                    </div>
+                    <span class="status-badge status-pending" id="djBadge">Por Elegir</span>
                 </div>
-                <div class="menu-card">
-                    <h3><i class="fas fa-glass-cheers"></i> Recepción</h3>
-                    <textarea placeholder="Música de ambiente:&#10;- Jazz suave&#10;- Bossa nova&#10;- Pop en español&#10;&#10;Entrada de la quinceañera:"></textarea>
+                <div class="provider-details">
+                    <div class="detail-item">
+                        <label><i class="fas fa-clock"></i> Horas Contratadas</label>
+                        <span id="djHours">5 horas</span>
+                    </div>
+                    <div class="detail-item">
+                        <label><i class="fas fa-user"></i> Proveedor</label>
+                        <span id="djProvider">Por definir</span>
+                    </div>
+                    <div class="detail-item">
+                        <label><i class="fas fa-dollar-sign"></i> Costo</label>
+                        <span id="djCost">Por cotizar</span>
+                    </div>
+                    <div class="detail-item">
+                        <label><i class="fas fa-play"></i> Horario</label>
+                        <span id="djSchedule">21:30 - 02:30</span>
+                    </div>
                 </div>
-                <div class="menu-card">
-                    <h3><i class="fas fa-fire"></i> Fiesta</h3>
-                    <textarea placeholder="Géneros para la fiesta:&#10;- Reggaetón&#10;- Pop Latino&#10;- Electrónica&#10;- Rock en español&#10;- Banda/Norteño"></textarea>
-                </div>
-                <div class="menu-card">
-                    <h3><i class="fas fa-ban"></i> No Reproducir</h3>
-                    <textarea placeholder="Canciones o géneros a evitar:&#10;&#10;&#10;"></textarea>
+
+                <h4 style="margin-top: 20px;"><i class="fas fa-check-circle"></i> Equipo Incluido</h4>
+                <div class="checkbox-group" id="djEquipment">
+                    <label><input type="checkbox" id="equip-sound" checked><span>Equipo de sonido profesional</span></label>
+                    <label><input type="checkbox" id="equip-led"><span>Iluminación LED</span></label>
+                    <label><input type="checkbox" id="equip-robotic"><span>Luces robóticas</span></label>
+                    <label><input type="checkbox" id="equip-smoke"><span>Máquina de humo</span></label>
+                    <label><input type="checkbox" id="equip-screen"><span>Pantalla para proyección</span></label>
+                    <label><input type="checkbox" id="equip-mic"><span>Micrófono inalámbrico</span></label>
                 </div>
             </div>
         </section>
 
+        <!-- Banda -->
         <section class="service-section">
-            <h2><i class="fas fa-exclamation-circle"></i> Notas Especiales</h2>
+            <h2><i class="fas fa-guitar"></i> Banda en Vivo</h2>
+            <div class="music-provider-card banda">
+                <div class="provider-header">
+                    <div class="provider-icon banda"><i class="fas fa-guitar"></i></div>
+                    <div class="provider-info">
+                        <h3>Banda Musical</h3>
+                        <p id="bandaStatus">Estado: Por elegir proveedor</p>
+                    </div>
+                    <span class="status-badge status-pending" id="bandaBadge">Por Elegir</span>
+                </div>
+                <div class="provider-details">
+                    <div class="detail-item">
+                        <label><i class="fas fa-clock"></i> Horas Contratadas</label>
+                        <span id="bandaHours">3 horas</span>
+                    </div>
+                    <div class="detail-item">
+                        <label><i class="fas fa-user"></i> Proveedor</label>
+                        <span id="bandaProvider">Por definir</span>
+                    </div>
+                    <div class="detail-item">
+                        <label><i class="fas fa-dollar-sign"></i> Costo</label>
+                        <span id="bandaCost">Por cotizar</span>
+                    </div>
+                    <div class="detail-item">
+                        <label><i class="fas fa-play"></i> Horario</label>
+                        <span id="bandaSchedule">22:00 - 01:00</span>
+                    </div>
+                </div>
+
+                <div class="special-feature" id="caballoFeature">
+                    <i class="fas fa-horse" style="font-size: 2rem;"></i>
+                    <div>
+                        <strong>Entrada Especial con Caballo</strong>
+                        <p style="margin: 5px 0 0 0; opacity: 0.9;">La quinceañera entra acompañada de la banda en caballo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Canciones para Momentos Especiales -->
+        <section class="service-section">
+            <h2><i class="fas fa-star"></i> Canciones para Momentos Especiales</h2>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-door-open" style="color: #e84393;"></i> Entrada de la Quinceañera</h4>
+                <input type="text" id="songEntrada" placeholder="Canción para la entrada triunfal...">
+            </div>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-heart" style="color: #e74c3c;"></i> Vals Tradicional con el Padre</h4>
+                <input type="text" id="songValsTradicional" placeholder="Canción para el vals padre-hija...">
+            </div>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-magic" style="color: #9b59b6;"></i> Vals Sorpresa / Baile Folclórico</h4>
+                <input type="text" id="songValsSorpresa" placeholder="Canción para el vals sorpresa o baile folclórico...">
+            </div>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-users" style="color: #3498db;"></i> Baile con Chambelanes</h4>
+                <input type="text" id="songChambelanes" placeholder="Canción para el baile con chambelanes...">
+            </div>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-glass-cheers" style="color: #f39c12;"></i> Brindis</h4>
+                <input type="text" id="songBrindis" placeholder="Canción para el momento del brindis...">
+            </div>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-birthday-cake" style="color: #e91e63;"></i> Partida del Pastel</h4>
+                <input type="text" id="songPastel" placeholder="Canción para partir el pastel...">
+            </div>
+
+            <div class="moment-songs">
+                <h4><i class="fas fa-heart" style="color: #27ae60;"></i> Último Vals con la Familia</h4>
+                <input type="text" id="songUltimoVals" placeholder="Canción para cerrar la noche con la familia...">
+            </div>
+        </section>
+
+        <!-- Lista de Canciones Solicitadas -->
+        <section class="service-section">
+            <h2><i class="fas fa-list-music"></i> Canciones que Quiero que Ponga el DJ</h2>
             <div class="form-card">
-                <div class="form-group">
-                    <label>Instrucciones Especiales para el DJ</label>
-                    <textarea rows="6" placeholder="- Volumen moderado durante la cena&#10;- Anunciar momentos especiales&#10;- Coordinar con el maestro de ceremonias&#10;- Tomar peticiones de invitados&#10;- Etc."></textarea>
+                <p style="color: #7f8c8d; margin-bottom: 15px;">Agrega las canciones que te gustaría escuchar en tu fiesta:</p>
+
+                <div class="song-input-group">
+                    <input type="text" id="newSong" placeholder="Nombre de la canción - Artista">
+                    <button onclick="addSong()"><i class="fas fa-plus"></i> Agregar</button>
                 </div>
-                <button class="btn-save"><i class="fas fa-save"></i> Guardar Notas</button>
+
+                <ul class="song-list" id="songList">
+                    <!-- Se carga dinámicamente -->
+                </ul>
             </div>
         </section>
+
+        <!-- Canciones a Evitar -->
+        <section class="service-section">
+            <h2><i class="fas fa-ban"></i> Canciones / Géneros a Evitar</h2>
+            <div class="form-card">
+                <p style="color: #7f8c8d; margin-bottom: 15px;">Canciones o géneros que NO quieres que suenen:</p>
+
+                <div class="song-input-group">
+                    <input type="text" id="newAvoid" placeholder="Canción o género a evitar...">
+                    <button onclick="addAvoid()" style="background: #e74c3c;"><i class="fas fa-plus"></i></button>
+                </div>
+
+                <ul class="song-list" id="avoidList">
+                    <!-- Se carga dinámicamente -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Notas Especiales -->
+        <section class="service-section">
+            <h2><i class="fas fa-sticky-note"></i> Notas para el DJ y Banda</h2>
+            <div class="form-card">
+                <textarea id="musicNotes" rows="6" placeholder="- Volumen moderado durante la cena&#10;- Anunciar momentos especiales&#10;- Coordinar con el maestro de ceremonias&#10;- El estilo favorito es FOLCLOR&#10;- Etc."></textarea>
+            </div>
+        </section>
+
+        <!-- Botones de acción -->
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+            <button onclick="saveAllMusic()" class="btn-save" style="flex: 1; min-width: 200px;">
+                <i class="fas fa-save"></i> Guardar Todo
+            </button>
+            <button onclick="sendViaWhatsApp()" style="flex: 1; min-width: 200px; padding: 15px 25px; background: #25D366; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem;">
+                <i class="fab fa-whatsapp"></i> Enviar Lista al DJ
+            </button>
+        </div>
     </div>
+
     <script src="../js/data-loader.js"></script>
-    <script src="../js/whatsapp-sender.js"></script>
-    <script src="../js/servicios.js"></script>
+    <script src="../js/data-manager.js"></script>
     <script>
-        let serviciosData = null;
+        const STORAGE_KEY = 'xv-barbara-music';
+        let musicData = {
+            styles: ['Folclor', 'Baile folclórico'],
+            songs: [],
+            avoid: [],
+            moments: {},
+            notes: ''
+        };
+
         document.addEventListener('DOMContentLoaded', async () => {
-            serviciosData = await dataLoader.loadJSON('../data/servicios.json');
-            if (serviciosData) {
-                dataLoader.populateForm('formMusica', serviciosData);
-                dataLoader.initAutoSave('formMusica', 'musica', serviciosData);
-                console.log('Música loaded');
+            // Cargar datos del JSON
+            const data = await dataLoader.loadJSON('../data/data.json');
+            const serviciosData = data;
+            const eventoData = data;
+
+            if (eventoData) {
+                document.getElementById('quinceName').textContent = `XV Años ${eventoData.quinceañera?.nombre || ''}`;
+
+                // Cargar estilos favoritos
+                if (eventoData.quinceañera?.gustosMusicales) {
+                    musicData.styles = [...eventoData.quinceañera.gustosMusicales];
+                }
             }
+
+            if (serviciosData) {
+                const musica = serviciosData.servicios?.musica;
+
+                if (musica) {
+                    // DJ
+                    if (musica.dj) {
+                        document.getElementById('djHours').textContent = `${musica.dj.horas || 5} horas`;
+                        document.getElementById('djProvider').textContent = musica.dj.proveedor || 'Por definir';
+                        document.getElementById('djCost').textContent = musica.dj.costo ? `$${musica.dj.costo.toLocaleString()}` : 'Por cotizar';
+
+                        if (musica.dj.estado === 'confirmado') {
+                            document.getElementById('djBadge').textContent = 'Confirmado';
+                            document.getElementById('djBadge').className = 'status-badge status-confirmed';
+                        }
+
+                        // Equipo
+                        if (musica.dj.equipo) {
+                            document.getElementById('equip-sound').checked = musica.dj.equipo.sonidoProfesional || false;
+                            document.getElementById('equip-led').checked = musica.dj.equipo.iluminacionLED || false;
+                            document.getElementById('equip-robotic').checked = musica.dj.equipo.lucesRoboticas || false;
+                            document.getElementById('equip-smoke').checked = musica.dj.equipo.maquinaHumo || false;
+                            document.getElementById('equip-screen').checked = musica.dj.equipo.pantallaProyeccion || false;
+                            document.getElementById('equip-mic').checked = musica.dj.equipo.microfonoInalambrico || false;
+                        }
+                    }
+
+                    // Banda
+                    if (musica.banda) {
+                        document.getElementById('bandaHours').textContent = `${musica.banda.horas || 3} horas`;
+                        document.getElementById('bandaProvider').textContent = musica.banda.proveedor || 'Por definir';
+                        document.getElementById('bandaCost').textContent = musica.banda.costo ? `$${musica.banda.costo.toLocaleString()}` : 'Por cotizar';
+
+                        // Entrada en caballo
+                        if (!musica.banda.entradaEnCaballo) {
+                            document.getElementById('caballoFeature').style.display = 'none';
+                        }
+
+                        if (musica.banda.estado === 'confirmado') {
+                            document.getElementById('bandaBadge').textContent = 'Confirmado';
+                            document.getElementById('bandaBadge').className = 'status-badge status-confirmed';
+                        }
+                    }
+
+                    // Estilos favoritos del servicio
+                    if (musica.estilosFavoritos) {
+                        musicData.styles = [...new Set([...musicData.styles, ...musica.estilosFavoritos])];
+                    }
+
+                    // Playlist existente
+                    if (musica.playlist) {
+                        if (musica.playlist.cancionesSolicitadas) {
+                            musicData.songs = musica.playlist.cancionesSolicitadas;
+                        }
+                        if (musica.playlist.noReproducir) {
+                            musicData.avoid = Array.isArray(musica.playlist.noReproducir) ? musica.playlist.noReproducir : [];
+                        }
+                    }
+                }
+            }
+
+            // Cargar datos guardados localmente
+            loadLocalData();
+
+            // Renderizar
+            renderStyles();
+            renderSongs();
+            renderAvoid();
         });
-        function enviarDatosMusica() {
-            whatsappSender.confirmAndSend('formMusica', 'Música & DJ - Foro 7', '🎵');
+
+        function loadLocalData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const local = JSON.parse(saved);
+                musicData = { ...musicData, ...local };
+
+                // Restaurar campos de momentos
+                if (local.moments) {
+                    Object.keys(local.moments).forEach(key => {
+                        const input = document.getElementById(key);
+                        if (input) input.value = local.moments[key] || '';
+                    });
+                }
+
+                // Restaurar notas
+                if (local.notes) {
+                    document.getElementById('musicNotes').value = local.notes;
+                }
+            }
         }
+
+        function saveLocalData() {
+            // Guardar momentos
+            musicData.moments = {
+                songEntrada: document.getElementById('songEntrada').value,
+                songValsTradicional: document.getElementById('songValsTradicional').value,
+                songValsSorpresa: document.getElementById('songValsSorpresa').value,
+                songChambelanes: document.getElementById('songChambelanes').value,
+                songBrindis: document.getElementById('songBrindis').value,
+                songPastel: document.getElementById('songPastel').value,
+                songUltimoVals: document.getElementById('songUltimoVals').value
+            };
+
+            musicData.notes = document.getElementById('musicNotes').value;
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(musicData));
+        }
+
+        function renderStyles() {
+            const container = document.getElementById('favoriteStyles');
+            container.innerHTML = musicData.styles.map(style => `
+                <span class="style-tag">
+                    <i class="fas fa-music"></i> ${style}
+                    <button onclick="removeStyle('${style}')" style="background: none; border: none; color: white; cursor: pointer; margin-left: 5px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </span>
+            `).join('');
+        }
+
+        function addStyle() {
+            const input = document.getElementById('newStyle');
+            const style = input.value.trim();
+            if (style && !musicData.styles.includes(style)) {
+                musicData.styles.push(style);
+                input.value = '';
+                renderStyles();
+                saveLocalData();
+            }
+        }
+
+        function removeStyle(style) {
+            musicData.styles = musicData.styles.filter(s => s !== style);
+            renderStyles();
+            saveLocalData();
+        }
+
+        function renderSongs() {
+            const container = document.getElementById('songList');
+            if (musicData.songs.length === 0) {
+                container.innerHTML = '<li style="color: #7f8c8d; font-style: italic;">No hay canciones agregadas aún</li>';
+                return;
+            }
+            container.innerHTML = musicData.songs.map((song, index) => `
+                <li>
+                    <i class="fas fa-music"></i>
+                    <span>${song}</span>
+                    <button class="remove-song" onclick="removeSong(${index})"><i class="fas fa-trash"></i></button>
+                </li>
+            `).join('');
+        }
+
+        function addSong() {
+            const input = document.getElementById('newSong');
+            const song = input.value.trim();
+            if (song) {
+                musicData.songs.push(song);
+                input.value = '';
+                renderSongs();
+                saveLocalData();
+            }
+        }
+
+        function removeSong(index) {
+            musicData.songs.splice(index, 1);
+            renderSongs();
+            saveLocalData();
+        }
+
+        function renderAvoid() {
+            const container = document.getElementById('avoidList');
+            if (musicData.avoid.length === 0) {
+                container.innerHTML = '<li style="color: #7f8c8d; font-style: italic;">No hay canciones/géneros a evitar</li>';
+                return;
+            }
+            container.innerHTML = musicData.avoid.map((item, index) => `
+                <li style="border-left: 4px solid #e74c3c;">
+                    <i class="fas fa-ban" style="color: #e74c3c;"></i>
+                    <span>${item}</span>
+                    <button class="remove-song" onclick="removeAvoid(${index})"><i class="fas fa-trash"></i></button>
+                </li>
+            `).join('');
+        }
+
+        function addAvoid() {
+            const input = document.getElementById('newAvoid');
+            const item = input.value.trim();
+            if (item) {
+                musicData.avoid.push(item);
+                input.value = '';
+                renderAvoid();
+                saveLocalData();
+            }
+        }
+
+        function removeAvoid(index) {
+            musicData.avoid.splice(index, 1);
+            renderAvoid();
+            saveLocalData();
+        }
+
+        function saveAllMusic() {
+            saveLocalData();
+            alert('Datos de música guardados correctamente');
+        }
+
+        function sendViaWhatsApp() {
+            saveLocalData();
+
+            let message = '*LISTA DE MÚSICA - XV AÑOS*\n\n';
+
+            message += '*ESTILOS FAVORITOS:*\n';
+            musicData.styles.forEach(s => message += `- ${s}\n`);
+
+            message += '\n*MOMENTOS ESPECIALES:*\n';
+            if (musicData.moments.songEntrada) message += `Entrada: ${musicData.moments.songEntrada}\n`;
+            if (musicData.moments.songValsTradicional) message += `Vals con Padre: ${musicData.moments.songValsTradicional}\n`;
+            if (musicData.moments.songValsSorpresa) message += `Vals Sorpresa: ${musicData.moments.songValsSorpresa}\n`;
+            if (musicData.moments.songChambelanes) message += `Chambelanes: ${musicData.moments.songChambelanes}\n`;
+            if (musicData.moments.songBrindis) message += `Brindis: ${musicData.moments.songBrindis}\n`;
+            if (musicData.moments.songPastel) message += `Pastel: ${musicData.moments.songPastel}\n`;
+            if (musicData.moments.songUltimoVals) message += `Último Vals: ${musicData.moments.songUltimoVals}\n`;
+
+            if (musicData.songs.length > 0) {
+                message += '\n*CANCIONES SOLICITADAS:*\n';
+                musicData.songs.forEach((s, i) => message += `${i + 1}. ${s}\n`);
+            }
+
+            if (musicData.avoid.length > 0) {
+                message += '\n*NO REPRODUCIR:*\n';
+                musicData.avoid.forEach(s => message += `- ${s}\n`);
+            }
+
+            if (musicData.notes) {
+                message += `\n*NOTAS:*\n${musicData.notes}\n`;
+            }
+
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Auto-guardar en inputs
+        document.querySelectorAll('input[id^="song"], textarea#musicNotes').forEach(el => {
+            el.addEventListener('change', saveLocalData);
+        });
+
+        // Enter para agregar
+        document.getElementById('newSong').addEventListener('keypress', e => { if (e.key === 'Enter') addSong(); });
+        document.getElementById('newAvoid').addEventListener('keypress', e => { if (e.key === 'Enter') addAvoid(); });
+        document.getElementById('newStyle').addEventListener('keypress', e => { if (e.key === 'Enter') addStyle(); });
     </script>
 </body>
 </html>

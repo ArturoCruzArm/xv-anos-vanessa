@@ -17,7 +17,7 @@ function updateDaysRemaining() {
     updateDisplay(defaultDate);
 
     // Actualizar con fecha real desde JSON
-    fetch('data/evento.json')
+    fetch('data/data.json')
         .then(response => response.json())
         .then(data => {
             if (data.fechas?.evento) {
@@ -75,7 +75,7 @@ function updateTasksCount() {
 // Load guest statistics from JSON and localStorage
 async function loadGuestStats() {
     try {
-        const eventoResponse = await fetch('data/evento.json');
+        const eventoResponse = await fetch('data/data.json');
         const eventoData = await eventoResponse.json();
 
         // Load estimated count from JSON
@@ -100,27 +100,23 @@ async function loadGuestStats() {
 // Load service contacts from JSON
 async function loadServiceContacts() {
     try {
-        // Cargar datos del evento
-        const eventoResponse = await fetch('data/evento.json');
-        const eventoData = await eventoResponse.json();
-
-        // Cargar datos de servicios
-        const serviciosResponse = await fetch('data/servicios.json');
-        const serviciosData = await serviciosResponse.json();
+        // Cargar datos consolidados
+        const response = await fetch('data/data.json');
+        const data = await response.json();
 
         // Actualizar Salón
-        if (eventoData.ubicaciones?.salon) {
-            const salon = eventoData.ubicaciones.salon;
+        if (data.ubicaciones?.salon) {
+            const salon = data.ubicaciones.salon;
             document.getElementById('salonInfo').textContent = salon.nombre || 'Pendiente de contratar';
             document.getElementById('salonTel').textContent = salon.telefono || '---';
         }
 
         // Actualizar Banquete
-        if (serviciosData.foro7?.servicios?.banquete) {
-            const banquete = serviciosData.foro7.servicios.banquete;
+        if (data.servicios?.banquete) {
+            const banquete = data.servicios.banquete;
             if (banquete.activo && banquete.contacto) {
                 document.getElementById('banqueteInfo').textContent = 'Foro 7 / Producciones LUZEL';
-                document.getElementById('banqueteTel').textContent = serviciosData.foro7.telefono || '477-920-3776';
+                document.getElementById('banqueteTel').textContent = data.administrador?.telefono || '477-920-3776';
             } else {
                 document.getElementById('banqueteInfo').textContent = 'Pendiente de contratar';
                 document.getElementById('banqueteTel').textContent = '---';
@@ -128,11 +124,11 @@ async function loadServiceContacts() {
         }
 
         // Actualizar Fotografía
-        if (serviciosData.foro7?.servicios?.fotografia) {
-            const fotografia = serviciosData.foro7.servicios.fotografia;
+        if (data.servicios?.fotografia) {
+            const fotografia = data.servicios.fotografia;
             if (fotografia.activo) {
-                document.getElementById('fotografiaInfo').textContent = serviciosData.foro7.nombre || 'Producciones Foro 7';
-                document.getElementById('fotografiaTel').textContent = serviciosData.foro7.telefono || '477-920-3776';
+                document.getElementById('fotografiaInfo').textContent = data.administrador?.nombre || 'Producciones Foro 7';
+                document.getElementById('fotografiaTel').textContent = data.administrador?.telefono || '477-920-3776';
             } else {
                 document.getElementById('fotografiaInfo').textContent = 'Pendiente de contratar';
                 document.getElementById('fotografiaTel').textContent = '---';
@@ -140,11 +136,11 @@ async function loadServiceContacts() {
         }
 
         // Actualizar Música
-        if (serviciosData.foro7?.servicios?.musica) {
-            const musica = serviciosData.foro7.servicios.musica;
-            if (musica.activo && musica.costo) {
+        if (data.servicios?.musica) {
+            const musica = data.servicios.musica;
+            if (musica.activo && musica.costoTotal) {
                 document.getElementById('musicaInfo').textContent = 'Foro 7';
-                document.getElementById('musicaTel').textContent = serviciosData.foro7.telefono || '477-920-3776';
+                document.getElementById('musicaTel').textContent = data.administrador?.telefono || '477-920-3776';
             } else {
                 document.getElementById('musicaInfo').textContent = 'Pendiente de contratar';
                 document.getElementById('musicaTel').textContent = '---';

@@ -74,11 +74,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Costo por Persona</label>
-                        <input type="number" id="costoPorPersona" placeholder="$350" data-json-path="foro7.banquete.costoPorPersona" data-label="💰 Costo por persona">
+                        <input type="number" id="costoPorPersona" placeholder="$350" data-json-path="servicios.banquete.costoPorPersona" data-label="💰 Costo por persona">
                     </div>
                     <div class="form-group">
                         <label>Número de Personas</label>
-                        <input type="number" id="numeroPersonas" placeholder="150" data-json-path="foro7.banquete.numeroPersonas" data-label="👥 Número de personas">
+                        <input type="number" id="numeroPersonas" placeholder="150" data-json-path="servicios.banquete.numeroPersonas" data-label="👥 Número de personas">
                     </div>
                 </div>
                 <div class="form-group">
@@ -208,7 +208,7 @@
     <script>
         let serviciosData = null;
         document.addEventListener('DOMContentLoaded', async () => {
-            serviciosData = await dataLoader.loadJSON('../data/servicios.json');
+            serviciosData = await dataLoader.loadJSON('../data/data.json');
             if (serviciosData) {
                 dataLoader.populateForm('formBanquete', serviciosData);
                 dataLoader.initAutoSave('formBanquete', 'banquete', serviciosData);

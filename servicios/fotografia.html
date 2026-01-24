@@ -152,7 +152,7 @@
     <script>
         let serviciosData = null;
         document.addEventListener('DOMContentLoaded', async () => {
-            serviciosData = await dataLoader.loadJSON('../data/servicios.json');
+            serviciosData = await dataLoader.loadJSON('../data/data.json');
             if (serviciosData) {
                 dataLoader.populateForm('formFotografia', serviciosData);
                 dataLoader.initAutoSave('formFotografia', 'fotografia', serviciosData);

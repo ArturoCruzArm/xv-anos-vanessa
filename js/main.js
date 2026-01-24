@@ -61,7 +61,7 @@ let eventoDataForCountdown = null;
 
 async function loadEventDataForCountdown() {
     try {
-        const response = await fetch('data/evento.json');
+        const response = await fetch('data/data.json');
         eventoDataForCountdown = await response.json();
     } catch (error) {
         console.error('Error cargando fecha del evento:', error);

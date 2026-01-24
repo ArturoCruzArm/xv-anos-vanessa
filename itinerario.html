@@ -149,7 +149,7 @@
                         <div class="timeline-content">
                             <div class="timeline-time">17:05 PM</div>
                             <p><strong>Traslado al Salón</strong></p>
-                            <small>Desplazamiento hacia Quinta Palomares (30 minutos)</small>
+                            <small>Desplazamiento hacia Granja El General (30 minutos)</small>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -157,7 +157,7 @@
                         <div class="timeline-content">
                             <div class="timeline-time">17:35 PM</div>
                             <p><strong>Llegada al Salón</strong></p>
-                            <small>Quinta Palomares - Fotos en exteriores</small>
+                            <small>Granja El General - Fotos en exteriores</small>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                         <div class="timeline-content">
                             <div class="timeline-time">17:35 PM</div>
                             <p><strong>Sesión de Fotos en Exteriores</strong></p>
-                            <small>Fotos de quinceañera en jardines de Quinta Palomares</small>
+                            <small>Fotos de quinceañera en jardines de Granja El General</small>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -351,7 +351,7 @@
         // Cargar fecha del evento desde JSON
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const eventoData = await dataLoader.loadJSON('data/evento.json');
+                const eventoData = await dataLoader.loadJSON('data/data.json');
                 
                 if (eventoData?.fechas?.evento) {
                     const fecha = new Date(eventoData.fechas.evento + 'T12:00:00');

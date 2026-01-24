@@ -644,8 +644,8 @@
             console.log('Cargando checklist...');
             
             // Load both JSON files
-            eventoData = await dataLoader.loadJSON('data/evento.json');
-            serviciosData = await dataLoader.loadJSON('data/servicios.json');
+            eventoData = await dataLoader.loadJSON('data/data.json');
+            serviciosData = eventoData;
 
             if (eventoData && serviciosData) {
                 updateChecklist();

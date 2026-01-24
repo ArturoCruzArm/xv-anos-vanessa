@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logística General - XV Años</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/servicios.css">
+    <style>
+        .timeline-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .timeline-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .timeline-minute {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        .timeline-minute:hover {
+            background: #e8f4fc;
+            transform: translateX(5px);
+        }
+        .timeline-minute.highlight {
+            border-left-color: #e74c3c;
+            background: #fdf2f2;
+        }
+        .timeline-minute.special {
+            border-left-color: #f39c12;
+            background: #fef9e7;
+        }
+        .minute-time {
+            min-width: 80px;
+            font-weight: bold;
+            color: #3498db;
+            font-size: 1.1rem;
+        }
+        .minute-content {
+            flex: 1;
+        }
+        .minute-content strong {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .minute-content small {
+            color: #7f8c8d;
+        }
+        .minute-responsible {
+            background: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        .info-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .info-card h2 {
+            margin: 0 0 10px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .info-item label {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        .info-item span {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .location-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .location-card h4 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .location-card p {
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+        .location-card a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .music-section {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .music-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .music-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+
+        <header class="service-header" style="background: linear-gradient(135deg, #00b894, #00cec9);">
+            <div class="service-icon"><i class="fas fa-clipboard-list"></i></div>
+            <h1>Logística General</h1>
+            <p>Minuto a minuto del evento - <span id="eventDateHeader">Cargando...</span></p>
+        </header>
+
+        <!-- Info General del Evento -->
+        <div class="info-card">
+            <h2><i class="fas fa-star"></i> XV Años de <span id="quinceName">Cargando...</span></h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label><i class="fas fa-calendar"></i> Fecha</label>
+                    <span id="eventDate">--</span>
+                </div>
+                <div class="info-item">
+                    <label><i class="fas fa-users"></i> Invitados</label>
+                    <span id="guestCount">--</span>
+                </div>
+                <div class="info-item">
+                    <label><i class="fas fa-church"></i> Misa</label>
+                    <span id="massTime">--</span>
+                </div>
+                <div class="info-item">
+                    <label><i class="fas fa-glass-cheers"></i> Recepción</label>
+                    <span id="receptionTime">--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ubicaciones -->
+        <section class="service-section">
+            <h2><i class="fas fa-map-marker-alt"></i> Ubicaciones</h2>
+            <div id="locationsContainer">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Timeline Mañana -->
+        <div class="timeline-section">
+            <h3><i class="fas fa-sun" style="color: #f39c12;"></i> Preparativos (Mañana)</h3>
+            <div id="timelineMorning">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Timeline Ceremonia -->
+        <div class="timeline-section">
+            <h3><i class="fas fa-church" style="color: #9b59b6;"></i> Ceremonia Religiosa</h3>
+            <div id="timelineCeremony">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Timeline Recepción -->
+        <div class="timeline-section">
+            <h3><i class="fas fa-glass-cheers" style="color: #e74c3c;"></i> Recepción y Fiesta</h3>
+            <div id="timelineReception">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Servicios Contratados -->
+        <section class="service-section">
+            <h2><i class="fas fa-concierge-bell"></i> Servicios del Evento</h2>
+            <div id="servicesContainer">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Música y Estilos -->
+        <div class="music-section" id="musicSection">
+            <h3><i class="fas fa-music"></i> Música - Estilo Favorito</h3>
+            <div class="music-list" id="musicStyles">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Contactos de Emergencia -->
+        <section class="service-section">
+            <h2><i class="fas fa-phone-alt"></i> Contactos del Día</h2>
+            <div class="contacts-grid" id="contactsContainer">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </section>
+    </div>
+
+    <script src="js/data-loader.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script>
+        // Timeline predeterminado (se puede editar en el JSON)
+        const defaultTimeline = {
+            morning: [
+                { time: "09:00", title: "Desayuno Familiar", desc: "Momento especial con la familia", responsible: "Familia" },
+                { time: "10:00", title: "Inicio de Maquillaje y Peinado", desc: "Estilista profesional en casa", responsible: "Estilista" },
+                { time: "12:00", title: "Sesión de Fotos Pre-Evento", desc: "Fotos en casa con la familia", responsible: "Foro 7" },
+                { time: "14:00", title: "Almuerzo Ligero", desc: "Descanso y preparación final", responsible: "Familia" },
+                { time: "15:00", title: "Vestido y Últimos Detalles", desc: "Preparación final antes de salir", responsible: "Familia" },
+                { time: "15:30", title: "Salida hacia la Ceremonia", desc: "Traslado a la iglesia", responsible: "Familia", highlight: true }
+            ],
+            ceremony: [
+                { time: "15:55", title: "Llegada a la Iglesia", desc: "5 minutos antes del inicio", responsible: "Familia" },
+                { time: "16:00", title: "Inicio de la Ceremonia", desc: "Entrada de la quinceañera con sus padres", responsible: "Sacerdote", highlight: true },
+                { time: "16:45", title: "Fin de la Misa", desc: "Ceremonia religiosa concluye", responsible: "Sacerdote" },
+                { time: "16:50", title: "Ofrenda Floral", desc: "Ramo a la Virgen", responsible: "Quinceañera" },
+                { time: "16:55", title: "Felicitaciones", desc: "Saludo de invitados", responsible: "Familia" },
+                { time: "17:10", title: "Sesión de Fotos", desc: "Fotos en exteriores de la iglesia", responsible: "Foro 7" },
+                { time: "17:30", title: "Traslado al Salón", desc: "Desplazamiento hacia el salón", responsible: "Familia" }
+            ],
+            reception: []
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Cargar datos de los JSONs
+                const data = await dataLoader.loadJSON('data/data.json');
+                const eventoData = data;
+                const serviciosData = data;
+                const presupuestoData = data;
+
+                if (eventoData) {
+                    renderEventInfo(eventoData);
+                    renderLocations(eventoData);
+                    renderTimelines(eventoData, serviciosData);
+                }
+
+                if (serviciosData) {
+                    renderServices(serviciosData, presupuestoData);
+                    renderMusicSection(serviciosData, eventoData);
+                    renderContacts(serviciosData);
+                }
+
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+            }
+        });
+
+        function renderEventInfo(data) {
+            // Nombre de la quinceañera
+            document.getElementById('quinceName').textContent = data.quinceañera?.nombre || 'Quinceañera';
+
+            // Fecha
+            if (data.fechas?.evento) {
+                const fecha = new Date(data.fechas.evento + 'T12:00:00');
+                const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
+                const fechaCapitalizada = fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);
+                document.getElementById('eventDateHeader').textContent = fechaFormateada;
+                document.getElementById('eventDate').textContent = `${data.fechas.diaEvento} de Abril 2026`;
+            }
+
+            // Invitados
+            document.getElementById('guestCount').textContent = data.invitados?.numeroEstimado || '--';
+
+            // Horarios
+            document.getElementById('massTime').textContent = data.fechas?.horaMisa || '--';
+            document.getElementById('receptionTime').textContent = data.fechas?.horaRecepcion || '--';
+        }
+
+        function renderLocations(data) {
+            const container = document.getElementById('locationsContainer');
+            const locations = data.ubicaciones;
+
+            let html = '';
+
+            // Iglesia
+            if (locations?.iglesia) {
+                html += `
+                    <div class="location-card">
+                        <h4><i class="fas fa-church" style="color: #9b59b6;"></i> ${locations.iglesia.nombre || 'Iglesia'}</h4>
+                        <p><i class="fas fa-map-pin"></i> ${locations.iglesia.direccion || 'Dirección por confirmar'}</p>
+                        <p><i class="fas fa-dollar-sign"></i> Costo: $${(locations.iglesia.costo || 0).toLocaleString()} ${locations.iglesia.pagadoPor === 'cliente_directo' ? '(Pagado por cliente)' : ''}</p>
+                        ${locations.iglesia.googleMaps ? `<a href="${locations.iglesia.googleMaps}" target="_blank"><i class="fas fa-directions"></i> Ver en Google Maps</a>` : ''}
+                    </div>
+                `;
+            }
+
+            // Salón
+            if (locations?.salon) {
+                html += `
+                    <div class="location-card">
+                        <h4><i class="fas fa-building" style="color: #3498db;"></i> ${locations.salon.nombre || 'Salón'}</h4>
+                        <p><i class="fas fa-map-pin"></i> ${locations.salon.direccion || 'Dirección por confirmar'}</p>
+                        <p><i class="fas fa-users"></i> Capacidad: ${locations.salon.capacidad || '--'} personas</p>
+                        <p><i class="fas fa-dollar-sign"></i> Costo: $${(locations.salon.costo || 0).toLocaleString()} ${locations.salon.pagadoPor === 'cliente_directo' ? '(Pagado por cliente)' : ''}</p>
+                        ${locations.salon.googleMaps ? `<a href="${locations.salon.googleMaps}" target="_blank"><i class="fas fa-directions"></i> Ver en Google Maps</a>` : ''}
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function renderTimelines(eventoData, serviciosData) {
+            // Timeline mañana
+            let morningHtml = '';
+            defaultTimeline.morning.forEach(item => {
+                morningHtml += createTimelineItem(item);
+            });
+            document.getElementById('timelineMorning').innerHTML = morningHtml;
+
+            // Timeline ceremonia
+            let ceremonyHtml = '';
+            defaultTimeline.ceremony.forEach(item => {
+                morningHtml += createTimelineItem(item);
+            });
+            document.getElementById('timelineCeremony').innerHTML = morningHtml;
+
+            // Timeline recepción - con entrada especial de banda
+            const hasEntradaCaballo = serviciosData?.servicios?.musica?.banda?.entradaEnCaballo;
+            const salonName = eventoData?.ubicaciones?.salon?.nombre || 'Salón';
+
+            const receptionTimeline = [
+                { time: "17:45", title: `Llegada al ${salonName}`, desc: "Fotos en exteriores del salón", responsible: "Foro 7" },
+                { time: "18:30", title: "Recepción de Invitados", desc: "Llegada de invitados - Cóctel de bienvenida", responsible: "Personal" },
+                { time: "19:00", title: hasEntradaCaballo ? "Entrada Triunfal con Banda y Caballo" : "Entrada Triunfal de la Quinceañera",
+                  desc: hasEntradaCaballo ? "La quinceañera entra acompañada de la banda en caballo" : "Gran entrada al salón con música especial",
+                  responsible: hasEntradaCaballo ? "Banda" : "DJ", highlight: true, special: hasEntradaCaballo },
+                { time: "19:15", title: "Vals con el Padre", desc: "Baile tradicional padre-hija", responsible: "DJ" },
+                { time: "19:25", title: "Cambio de Zapatilla", desc: "Ceremonia simbólica de la zapatilla", responsible: "Padrino" },
+                { time: "19:35", title: "Vals Sorpresa / Baile Folclórico", desc: "Coreografía especial preparada - Estilo folclórico", responsible: "Quinceañera", special: true },
+                { time: "19:50", title: "Baile con Chambelanes", desc: "Baile grupal con damas y chambelanes", responsible: "Chambelanes" },
+                { time: "20:00", title: "Inicio de la Cena (Carnitas)", desc: "Servicio de banquete - Menú de carnitas", responsible: "Banquete" },
+                { time: "20:30", title: "Brindis y Palabras", desc: "Discursos de padres, padrinos y quinceañera", responsible: "Familia" },
+                { time: "21:00", title: "Partida del Pastel", desc: "Momento del pastel y fotos", responsible: "Foro 7" },
+                { time: "21:30", title: "Apertura de Pista - DJ", desc: "Inicio del baile y la fiesta (5 horas)", responsible: "DJ" },
+                { time: "22:00", title: "Banda en Vivo", desc: "3 horas de banda", responsible: "Banda" },
+                { time: "23:30", title: "Torito (si se confirma)", desc: "Espectáculo del torito - $3,800", responsible: "Salón", special: true },
+                { time: "00:00", title: "Pirotecnia", desc: "Espectáculo pirotécnico", responsible: "Proveedor", special: true },
+                { time: "01:00", title: "Última Canción", desc: "Cierre de la celebración", responsible: "DJ" },
+                { time: "01:30", title: "Entrega de Recuerdos", desc: "Despedida y agradecimiento a invitados", responsible: "Familia" },
+                { time: "02:00", title: "Fin del Evento", desc: "Cierre oficial de la fiesta", responsible: "Todos", highlight: true }
+            ];
+
+            let receptionHtml = '';
+            receptionTimeline.forEach(item => {
+                receptionHtml += createTimelineItem(item);
+            });
+            document.getElementById('timelineReception').innerHTML = receptionHtml;
+        }
+
+        function createTimelineItem(item) {
+            let classes = 'timeline-minute';
+            if (item.highlight) classes += ' highlight';
+            if (item.special) classes += ' special';
+
+            return `
+                <div class="${classes}">
+                    <div class="minute-time">${item.time}</div>
+                    <div class="minute-content">
+                        <strong>${item.title}</strong>
+                        <small>${item.desc}</small>
+                    </div>
+                    ${item.responsible ? `<span class="minute-responsible">${item.responsible}</span>` : ''}
+                </div>
+            `;
+        }
+
+        function renderServices(serviciosData, presupuestoData) {
+            const container = document.getElementById('servicesContainer');
+            const services = serviciosData?.servicios;
+
+            let html = '<div class="info-grid">';
+
+            // Fotografía
+            if (services?.fotografia) {
+                html += `
+                    <div class="location-card">
+                        <h4><i class="fas fa-camera" style="color: #e74c3c;"></i> Fotografía y Video</h4>
+                        <p><strong>Paquete:</strong> ${services.fotografia.paqueteSeleccionado?.nombre || 'Super Paquete $8,500'}</p>
+                        <p><strong>Dron:</strong> ${services.fotografia.adicionales?.dron?.contratado ? 'Sí (+$1,200)' : 'No'}</p>
+                        <p><strong>Total:</strong> $${(services.fotografia.costoTotal || 0).toLocaleString()}</p>
+                    </div>
+                `;
+            }
+
+            // Banquete
+            if (services?.banquete) {
+                html += `
+                    <div class="location-card">
+                        <h4><i class="fas fa-utensils" style="color: #27ae60;"></i> Banquete</h4>
+                        <p><strong>Tipo:</strong> ${services.banquete.tipoMenu?.toUpperCase() || 'Por definir'}</p>
+                        <p><strong>Paquete:</strong> ${services.banquete.paqueteSeleccionado || 'Por definir'}</p>
+                        <p><strong>Personas:</strong> ${services.banquete.totalPlatillos || services.banquete.numeroPersonas || '--'}</p>
+                        <p><strong>Costo:</strong> $${(services.banquete.costoTotal || 0).toLocaleString()}</p>
+                    </div>
+                `;
+            }
+
+            // DJ
+            if (services?.musica?.dj) {
+                html += `
+                    <div class="location-card">
+                        <h4><i class="fas fa-headphones" style="color: #9b59b6;"></i> DJ / Sonido</h4>
+                        <p><strong>Horas:</strong> ${services.musica.dj.horas || '--'} horas</p>
+                        <p><strong>Estado:</strong> ${services.musica.dj.estado === 'por_elegir' ? 'Por elegir proveedor' : services.musica.dj.proveedor || '--'}</p>
+                    </div>
+                `;
+            }
+
+            // Banda
+            if (services?.musica?.banda) {
+                html += `
+                    <div class="location-card">
+                        <h4><i class="fas fa-guitar" style="color: #f39c12;"></i> Banda</h4>
+                        <p><strong>Horas:</strong> ${services.musica.banda.horas || '--'} horas</p>
+                        <p><strong>Entrada en caballo:</strong> ${services.musica.banda.entradaEnCaballo ? 'Sí' : 'No'}</p>
+                        <p><strong>Estado:</strong> ${services.musica.banda.estado === 'por_elegir' ? 'Por elegir proveedor' : services.musica.banda.proveedor || '--'}</p>
+                    </div>
+                `;
+            }
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function renderMusicSection(serviciosData, eventoData) {
+            const container = document.getElementById('musicStyles');
+            const estilos = eventoData?.quinceañera?.gustosMusicales || serviciosData?.servicios?.musica?.estilosFavoritos || ['Folclor'];
+
+            let html = '';
+            estilos.forEach(estilo => {
+                html += `<span class="music-tag"><i class="fas fa-music"></i> ${estilo}</span>`;
+            });
+
+            // Agregar nota sobre el vestido dorado
+            if (eventoData?.quinceañera?.vestido?.color) {
+                html += `<span class="music-tag"><i class="fas fa-tshirt"></i> Vestido: ${eventoData.quinceañera.vestido.color}</span>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function renderContacts(serviciosData) {
+            const container = document.getElementById('contactsContainer');
+
+            let html = `
+                <div class="contact-card">
+                    <i class="fas fa-camera contact-icon"></i>
+                    <h4>Foro 7 Producciones</h4>
+                    <p>Fotografía y Video</p>
+                    <p><i class="fas fa-phone"></i> ${serviciosData?.administrador?.telefono || '477-920-3776'}</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-utensils contact-icon"></i>
+                    <h4>Banquete</h4>
+                    <p>${serviciosData?.servicios?.banquete?.contacto || 'Contacto banquete'}</p>
+                    <p><i class="fas fa-phone"></i> ${serviciosData?.servicios?.banquete?.telefonos?.celular || '--'}</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-headphones contact-icon"></i>
+                    <h4>DJ / Sonido</h4>
+                    <p>Por definir</p>
+                    <p><i class="fas fa-phone"></i> --</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-guitar contact-icon"></i>
+                    <h4>Banda</h4>
+                    <p>Por definir</p>
+                    <p><i class="fas fa-phone"></i> --</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

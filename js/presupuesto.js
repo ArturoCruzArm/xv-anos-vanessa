@@ -4,8 +4,9 @@ let presupuestoData = null;
 document.addEventListener('DOMContentLoaded', async () => {
     // Cargar datos desde JSON
     try {
-        const response = await fetch('data/presupuesto.json');
-        presupuestoData = await response.json();
+        const response = await fetch('data/data.json');
+        const data = await response.json();
+        presupuestoData = data.presupuesto;
 
         console.log('✓ Presupuesto cargado desde JSON:', presupuestoData);
 

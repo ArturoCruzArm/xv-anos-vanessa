@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Nombres - XV Años</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/servicios.css">
+    <style>
+        .names-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ecf0f1;
+        }
+        .section-header .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+        }
+        .section-header h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .name-field {
+            margin-bottom: 20px;
+        }
+        .name-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .name-field input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .name-field input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        .name-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .chambelan-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .chambelan-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        .chambelan-item:hover {
+            background: #e8f4fc;
+        }
+        .chambelan-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .chambelan-item input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        .chambelan-item .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .chambelan-item .remove-btn:hover {
+            background: #c0392b;
+        }
+        .add-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .action-buttons button {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .action-buttons button:hover {
+            transform: translateY(-2px);
+        }
+        .btn-save {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        .btn-clear {
+            background: #e74c3c;
+            color: white;
+        }
+        .status-bar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .status-bar h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .info-note {
+            background: #fff9e6;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+        .info-note i {
+            color: #f39c12;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="admin.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+
+        <header class="service-header" style="background: linear-gradient(135deg, #e84393, #fd79a8);">
+            <div class="service-icon"><i class="fas fa-users"></i></div>
+            <h1>Formulario de Nombres</h1>
+            <p>Quinceañera, Papás, Padrinos, Madrinas y Chambelanes</p>
+        </header>
+
+        <div class="status-bar">
+            <h3><i class="fas fa-save"></i> Los datos se guardan automáticamente</h3>
+            <span class="status-badge" id="lastSaved">Sin guardar aún</span>
+        </div>
+
+        <div class="info-note">
+            <i class="fas fa-info-circle"></i>
+            <strong>Instrucciones:</strong> Completa los nombres que necesitas para las invitaciones, programa del evento y agradecimientos.
+            Una vez completados, puedes enviarlos por WhatsApp para revisión.
+        </div>
+
+        <!-- QUINCEAÑERA -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #fd79a8, #e84393);"><i class="fas fa-crown"></i></div>
+                <h2>La Quinceañera</h2>
+            </div>
+            <div class="name-row">
+                <div class="name-field">
+                    <label><i class="fas fa-star"></i> Nombre Completo</label>
+                    <input type="text" id="quinceName" placeholder="Ej: Barbara Brittany García López">
+                </div>
+                <div class="name-field">
+                    <label><i class="fas fa-birthday-cake"></i> Fecha de Nacimiento</label>
+                    <input type="date" id="quinceBirthday">
+                </div>
+            </div>
+        </div>
+
+        <!-- PADRES -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #74b9ff, #0984e3);"><i class="fas fa-user-friends"></i></div>
+                <h2>Padres</h2>
+            </div>
+            <div class="name-row">
+                <div class="name-field">
+                    <label><i class="fas fa-female"></i> Nombre de la Madre</label>
+                    <input type="text" id="motherName" placeholder="Ej: Patricia García Hernández">
+                </div>
+                <div class="name-field">
+                    <label><i class="fas fa-male"></i> Nombre del Padre</label>
+                    <input type="text" id="fatherName" placeholder="Ej: Juan López Martínez">
+                </div>
+            </div>
+        </div>
+
+        <!-- PADRINOS -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #ffeaa7, #f39c12);"><i class="fas fa-user-tie"></i></div>
+                <h2>Padrinos</h2>
+            </div>
+            <div id="padrinosList">
+                <!-- Se genera dinámicamente -->
+            </div>
+            <button class="add-btn" onclick="addPadrino()">
+                <i class="fas fa-plus"></i> Agregar Padrino
+            </button>
+        </div>
+
+        <!-- MADRINAS -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #fab1a0, #e17055);"><i class="fas fa-female"></i></div>
+                <h2>Madrinas</h2>
+            </div>
+            <div id="madrinasList">
+                <!-- Se genera dinámicamente -->
+            </div>
+            <button class="add-btn" onclick="addMadrina()">
+                <i class="fas fa-plus"></i> Agregar Madrina
+            </button>
+        </div>
+
+        <!-- CHAMBELANES -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);"><i class="fas fa-male"></i></div>
+                <h2>Chambelanes</h2>
+            </div>
+            <div id="chambelanesList">
+                <!-- Se genera dinámicamente -->
+            </div>
+            <button class="add-btn" onclick="addChambelan()">
+                <i class="fas fa-plus"></i> Agregar Chambelán
+            </button>
+        </div>
+
+        <!-- DAMAS -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #fd79a8, #e84393);"><i class="fas fa-female"></i></div>
+                <h2>Damas de Honor</h2>
+            </div>
+            <div id="damasList">
+                <!-- Se genera dinámicamente -->
+            </div>
+            <button class="add-btn" onclick="addDama()">
+                <i class="fas fa-plus"></i> Agregar Dama
+            </button>
+        </div>
+
+        <!-- NOTAS ADICIONALES -->
+        <div class="names-section">
+            <div class="section-header">
+                <div class="icon-circle" style="background: linear-gradient(135deg, #636e72, #2d3436);"><i class="fas fa-sticky-note"></i></div>
+                <h2>Notas Adicionales</h2>
+            </div>
+            <div class="name-field">
+                <label><i class="fas fa-comment"></i> Otros nombres o notas importantes</label>
+                <textarea id="additionalNotes" rows="4" style="width: 100%; padding: 15px; border: 2px solid #dfe6e9; border-radius: 12px; font-size: 1rem; resize: vertical;" placeholder="Ej: Nombre del sacerdote, maestro de ceremonias, etc."></textarea>
+            </div>
+        </div>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <div class="action-buttons">
+            <button class="btn-save" onclick="saveAll()">
+                <i class="fas fa-save"></i> Guardar Todo
+            </button>
+            <button class="btn-whatsapp" onclick="sendViaWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+            </button>
+            <button class="btn-clear" onclick="clearAll()">
+                <i class="fas fa-trash"></i> Limpiar Todo
+            </button>
+        </div>
+    </div>
+
+    <script src="js/data-loader.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script>
+        const STORAGE_KEY = 'xv-barbara-nombres';
+
+        let namesData = {
+            quinceañera: { nombre: '', fechaNacimiento: '' },
+            padres: { madre: '', padre: '' },
+            padrinos: [],
+            madrinas: [],
+            chambelanes: [],
+            damas: [],
+            notas: ''
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Cargar datos del JSON del evento
+            const eventoData = await dataLoader.loadJSON('data/data.json');
+
+            if (eventoData) {
+                // Pre-llenar con datos existentes
+                if (eventoData.quinceañera?.nombre) {
+                    namesData.quinceañera.nombre = eventoData.quinceañera.nombre;
+                }
+                if (eventoData.padres?.madre) {
+                    namesData.padres.madre = eventoData.padres.madre;
+                }
+                if (eventoData.padres?.padre) {
+                    namesData.padres.padre = eventoData.padres.padre;
+                }
+            }
+
+            // Cargar datos guardados localmente
+            loadData();
+
+            // Renderizar listas
+            renderAll();
+
+            // Llenar campos principales
+            document.getElementById('quinceName').value = namesData.quinceañera.nombre || '';
+            document.getElementById('quinceBirthday').value = namesData.quinceañera.fechaNacimiento || '';
+            document.getElementById('motherName').value = namesData.padres.madre || '';
+            document.getElementById('fatherName').value = namesData.padres.padre || '';
+            document.getElementById('additionalNotes').value = namesData.notas || '';
+
+            // Auto-guardar en cambios
+            setupAutoSave();
+        });
+
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const local = JSON.parse(saved);
+                namesData = { ...namesData, ...local };
+                updateLastSaved();
+            }
+        }
+
+        function saveData() {
+            // Recoger datos de los campos
+            namesData.quinceañera.nombre = document.getElementById('quinceName').value;
+            namesData.quinceañera.fechaNacimiento = document.getElementById('quinceBirthday').value;
+            namesData.padres.madre = document.getElementById('motherName').value;
+            namesData.padres.padre = document.getElementById('fatherName').value;
+            namesData.notas = document.getElementById('additionalNotes').value;
+
+            // Recoger padrinos
+            namesData.padrinos = [];
+            document.querySelectorAll('#padrinosList input').forEach(input => {
+                if (input.value.trim()) {
+                    namesData.padrinos.push({ nombre: input.value.trim(), rol: input.dataset.rol || '' });
+                }
+            });
+
+            // Recoger madrinas
+            namesData.madrinas = [];
+            document.querySelectorAll('#madrinasList input').forEach(input => {
+                if (input.value.trim()) {
+                    namesData.madrinas.push({ nombre: input.value.trim(), rol: input.dataset.rol || '' });
+                }
+            });
+
+            // Recoger chambelanes
+            namesData.chambelanes = [];
+            document.querySelectorAll('#chambelanesList input').forEach(input => {
+                if (input.value.trim()) {
+                    namesData.chambelanes.push(input.value.trim());
+                }
+            });
+
+            // Recoger damas
+            namesData.damas = [];
+            document.querySelectorAll('#damasList input').forEach(input => {
+                if (input.value.trim()) {
+                    namesData.damas.push(input.value.trim());
+                }
+            });
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(namesData));
+            updateLastSaved();
+        }
+
+        function updateLastSaved() {
+            const now = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('lastSaved').textContent = `Guardado: ${now}`;
+        }
+
+        function renderAll() {
+            renderPadrinos();
+            renderMadrinas();
+            renderChambelanes();
+            renderDamas();
+        }
+
+        function renderPadrinos() {
+            const container = document.getElementById('padrinosList');
+            if (namesData.padrinos.length === 0) {
+                namesData.padrinos = [{ nombre: '', rol: 'Honor' }];
+            }
+            container.innerHTML = namesData.padrinos.map((p, i) => `
+                <div class="chambelan-item">
+                    <div class="chambelan-number">${i + 1}</div>
+                    <input type="text" value="${p.nombre || ''}" placeholder="Nombre del padrino" onchange="saveData()">
+                    <input type="text" value="${p.rol || ''}" placeholder="Rol (ej: Honor, Pastel)" style="max-width: 150px;" data-rol="${p.rol || ''}" onchange="saveData()">
+                    <button class="remove-btn" onclick="removePadrino(${i})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addPadrino() {
+            namesData.padrinos.push({ nombre: '', rol: '' });
+            renderPadrinos();
+        }
+
+        function removePadrino(index) {
+            namesData.padrinos.splice(index, 1);
+            saveData();
+            renderPadrinos();
+        }
+
+        function renderMadrinas() {
+            const container = document.getElementById('madrinasList');
+            if (namesData.madrinas.length === 0) {
+                namesData.madrinas = [{ nombre: '', rol: 'Honor' }];
+            }
+            container.innerHTML = namesData.madrinas.map((m, i) => `
+                <div class="chambelan-item">
+                    <div class="chambelan-number" style="background: linear-gradient(135deg, #fab1a0, #e17055);">${i + 1}</div>
+                    <input type="text" value="${m.nombre || ''}" placeholder="Nombre de la madrina" onchange="saveData()">
+                    <input type="text" value="${m.rol || ''}" placeholder="Rol (ej: Honor, Pastel)" style="max-width: 150px;" data-rol="${m.rol || ''}" onchange="saveData()">
+                    <button class="remove-btn" onclick="removeMadrina(${i})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addMadrina() {
+            namesData.madrinas.push({ nombre: '', rol: '' });
+            renderMadrinas();
+        }
+
+        function removeMadrina(index) {
+            namesData.madrinas.splice(index, 1);
+            saveData();
+            renderMadrinas();
+        }
+
+        function renderChambelanes() {
+            const container = document.getElementById('chambelanesList');
+            if (namesData.chambelanes.length === 0) {
+                namesData.chambelanes = [''];
+            }
+            container.innerHTML = namesData.chambelanes.map((c, i) => `
+                <div class="chambelan-item">
+                    <div class="chambelan-number" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">${i + 1}</div>
+                    <input type="text" value="${c}" placeholder="Nombre del chambelán" onchange="saveData()">
+                    <button class="remove-btn" onclick="removeChambelan(${i})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addChambelan() {
+            namesData.chambelanes.push('');
+            renderChambelanes();
+        }
+
+        function removeChambelan(index) {
+            namesData.chambelanes.splice(index, 1);
+            saveData();
+            renderChambelanes();
+        }
+
+        function renderDamas() {
+            const container = document.getElementById('damasList');
+            if (namesData.damas.length === 0) {
+                namesData.damas = [''];
+            }
+            container.innerHTML = namesData.damas.map((d, i) => `
+                <div class="chambelan-item">
+                    <div class="chambelan-number" style="background: linear-gradient(135deg, #fd79a8, #e84393);">${i + 1}</div>
+                    <input type="text" value="${d}" placeholder="Nombre de la dama" onchange="saveData()">
+                    <button class="remove-btn" onclick="removeDama(${i})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addDama() {
+            namesData.damas.push('');
+            renderDamas();
+        }
+
+        function removeDama(index) {
+            namesData.damas.splice(index, 1);
+            saveData();
+            renderDamas();
+        }
+
+        function setupAutoSave() {
+            // Auto-guardar en los campos principales
+            const fields = ['quinceName', 'quinceBirthday', 'motherName', 'fatherName', 'additionalNotes'];
+            fields.forEach(id => {
+                document.getElementById(id).addEventListener('input', debounce(saveData, 500));
+            });
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        function saveAll() {
+            saveData();
+            alert('Datos guardados correctamente');
+        }
+
+        function sendViaWhatsApp() {
+            saveData();
+
+            let message = '*NOMBRES PARA XV AÑOS*\n\n';
+
+            message += '*QUINCEAÑERA:*\n';
+            message += `${namesData.quinceañera.nombre || 'Por definir'}\n`;
+            if (namesData.quinceañera.fechaNacimiento) {
+                message += `Fecha de nacimiento: ${namesData.quinceañera.fechaNacimiento}\n`;
+            }
+
+            message += '\n*PADRES:*\n';
+            if (namesData.padres.madre) message += `Madre: ${namesData.padres.madre}\n`;
+            if (namesData.padres.padre) message += `Padre: ${namesData.padres.padre}\n`;
+
+            if (namesData.padrinos.some(p => p.nombre)) {
+                message += '\n*PADRINOS:*\n';
+                namesData.padrinos.forEach((p, i) => {
+                    if (p.nombre) {
+                        message += `${i + 1}. ${p.nombre}${p.rol ? ` (${p.rol})` : ''}\n`;
+                    }
+                });
+            }
+
+            if (namesData.madrinas.some(m => m.nombre)) {
+                message += '\n*MADRINAS:*\n';
+                namesData.madrinas.forEach((m, i) => {
+                    if (m.nombre) {
+                        message += `${i + 1}. ${m.nombre}${m.rol ? ` (${m.rol})` : ''}\n`;
+                    }
+                });
+            }
+
+            if (namesData.chambelanes.some(c => c)) {
+                message += '\n*CHAMBELANES:*\n';
+                namesData.chambelanes.forEach((c, i) => {
+                    if (c) message += `${i + 1}. ${c}\n`;
+                });
+            }
+
+            if (namesData.damas.some(d => d)) {
+                message += '\n*DAMAS DE HONOR:*\n';
+                namesData.damas.forEach((d, i) => {
+                    if (d) message += `${i + 1}. ${d}\n`;
+                });
+            }
+
+            if (namesData.notas) {
+                message += `\n*NOTAS:*\n${namesData.notas}\n`;
+            }
+
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function clearAll() {
+            if (confirm('¿Estás seguro de que quieres borrar todos los nombres? Esta acción no se puede deshacer.')) {
+                namesData = {
+                    quinceañera: { nombre: '', fechaNacimiento: '' },
+                    padres: { madre: '', padre: '' },
+                    padrinos: [],
+                    madrinas: [],
+                    chambelanes: [],
+                    damas: [],
+                    notas: ''
+                };
+                localStorage.removeItem(STORAGE_KEY);
+
+                document.getElementById('quinceName').value = '';
+                document.getElementById('quinceBirthday').value = '';
+                document.getElementById('motherName').value = '';
+                document.getElementById('fatherName').value = '';
+                document.getElementById('additionalNotes').value = '';
+
+                renderAll();
+                alert('Todos los datos han sido borrados');
+            }
+        }
+    </script>
+</body>
+</html>

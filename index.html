@@ -147,8 +147,8 @@
                     </div>
                     <div class="event-info">
                         <strong><i class="fas fa-map-marker-alt"></i> Lugar</strong>
-                        <span id="salonName">Quinta Palomares</span><br>
-                        <span id="salonAddress" style="font-size: 0.9rem; color: var(--cream);">Lagunillas, Guanajuato</span>
+                        <span id="salonName">Granja El General</span><br>
+                        <span id="salonAddress" style="font-size: 0.9rem; color: var(--cream);">León de los Aldama, Gto.</span>
                     </div>
                     <div style="margin-top: 20px;">
                         <a href="#" id="salonMapLink" target="_blank" class="btn"><i class="fas fa-map-marked-alt"></i> Ver Mapa</a>
@@ -277,7 +277,7 @@
         // Load event data on page load
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const eventoData = await dataLoader.loadJSON('data/evento.json');
+                const eventoData = await dataLoader.loadJSON('data/data.json');
                 
                 if (eventoData) {
                     // Safe update function

@@ -6,15 +6,13 @@ let presupuestoData = null;
 let eventoData = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Cargar datos desde JSON
+    // Cargar datos desde JSON consolidado
     try {
-        const [presupuestoResponse, eventoResponse] = await Promise.all([
-            fetch('data/presupuesto.json'),
-            fetch('data/evento.json')
-        ]);
+        const response = await fetch('data/data.json');
+        const data = await response.json();
 
-        presupuestoData = await presupuestoResponse.json();
-        eventoData = await eventoResponse.json();
+        presupuestoData = data.presupuesto;
+        eventoData = data;
 
         // Esperar un poco para que la página se cargue
         setTimeout(() => {
